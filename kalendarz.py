@@ -85,6 +85,7 @@ def sprawdz(dane):
         except (KeyError, ValueError):
             bledy.append(f"{gdzie}: brak lub zły dzień ({p.get('dzien')!r}).")
         try:
+            _minuty(p["od"])  # sama godzina też musi być poprawna (program często nie ma "do")
             trwa = czas_trwania(p["od"], p.get("do"))
             if trwa == 0:
                 bledy.append(f"{gdzie}: od = do ({p['od']}).")
