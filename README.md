@@ -20,6 +20,7 @@ django-simple-history, PyMuPDF (wydruki), python-docx (Word). CLI `kalendarz.py`
 ## Uruchomienie lokalnie
 
 ```sh
+cp .env.example .env        # opcjonalnie: bez niego działają wartości domyślne (dev)
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 cd frontend && npm ci && npm run build && cd ..
 .venv/bin/python manage.py migrate
@@ -32,6 +33,11 @@ Konta lokalne zakłada się w `/serwis/` (`createsuperuser`). Logowanie przez Ko
 Pełna lista zmiennych: `deploy/env.production.example`.
 
 Testy: `.venv/bin/python -m pytest -q tests` (prawa modelu + Hypothesis).
+
+## Wdrożenie
+
+Docker: patrz [`WDROZENIE.md`](WDROZENIE.md) — zmienne (`cp .env.example .env`), reverse proxy/TLS,
+kopie zapasowe, aktualizacja i typowe problemy.
 
 ## Licencja
 
