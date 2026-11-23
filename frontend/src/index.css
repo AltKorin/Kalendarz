@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Motyw shadcn — neutralna baza; barwy lokalu (Ustawienia → kolory, Słownik Kolorów) nakłada Layout zmiennymi
+   --primary/--secondary/--accent/--ring, więc ten sam panel nosi barwy każdego lokalu. Domyślne barwy produktu:
+   Słownik Kolorów #030 (Mineral Gray + Pompeian Red), docs/PLAN-wersja-publiczna.md. */
+:root {
+  --radius: 0.5rem;
+  --background: #f8f8f6;
+  --foreground: #23262a;
+  --card: #ffffff;
+  --card-foreground: #23262a;
+  --popover: #ffffff;
+  --popover-foreground: #23262a;
+  --primary: #3a3f44;
+  --primary-foreground: #fbfbfa;
+  --secondary: #eef0f1;
+  --secondary-foreground: #23262a;
+  --muted: #eef0f1;
+  --muted-foreground: #62676d;
+  --accent: #eef0f1;
+  --accent-foreground: #3a3f44;
+  --destructive: #b42318;
+  --border: #e2e3e1;
+  --input: #d3d5d3;
+  --ring: #a3aab0;
+  --brand-akcent: #a3172b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-akcent: var(--brand-akcent);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  /* kroje lokalu (Lokal.fonty: tytul/tekst) nadpisuje Layout; domyślnie neutralny bezszeryfowy */
+  --font-tytul: "Segoe UI", system-ui, sans-serif;
+  --font-tekst: "Segoe UI", system-ui, sans-serif;
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground antialiased; font-family: var(--font-tekst); }
+  .skorka { font-family: var(--font-tekst); }
+  h1, h2, h3 { font-family: var(--font-tytul); }
+}
+
+@media print {
+  .nie-drukuj { display: none !important; }
+  body { background: white; }
+}
+
+/* treść regulaminu (HTML z przyjecia/dane/regulamin.html) */
+.regulamin h2 { margin: 1.75rem 0 0.5rem; font-size: 1.15rem; font-weight: 700; color: var(--primary); }
+.regulamin p, .regulamin li { line-height: 1.6; }
+.regulamin ol { list-style: decimal; padding-left: 1.4rem; }
+.regulamin li { margin: 0.35rem 0; }
+.regulamin a { text-decoration: underline; }
+.regulamin .updated { color: var(--muted-foreground); font-size: 0.9rem; }

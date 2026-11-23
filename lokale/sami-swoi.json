@@ -1,0 +1,29 @@
+{
+  "id": "sami-swoi",
+  "nazwa": "Restauracja Przykładowa",
+  "podpis": "ul. Przykładowa 1, Miasto",
+  "kontakt": "tel. 500 000 000 · lokal@example.com",
+  "logo": "sami-swoi-logo.png",
+  "fonty": {
+    "_zrodlo": "Krój z logo lokalu; tekst uzupełniający bezszeryfowy.",
+    "tytul": "Bookman Old Style",
+    "tekst": "Calibri"
+  },
+  "kolory": {
+    "_zrodlo": "Paleta ze Słownika Kolorów (taishō/shōwa), dobrana w projekcie lokalu.",
+    "glowny": "5A2820",
+    "akcent": "A64532",
+    "tlo_naglowka": "F2EEDF",
+    "linia": "C99A55"
+  },
+  "sale": {
+    "sala": "Sala bankietowa",
+    "kuchnia": "Kuchnia",
+    "bar": "Bar"
+  },
+  "dzialy": {
+    "kuchnia": "Kuchnia",
+    "sala": "Sala i kelnerzy",
+    "bar": "Bar"
+  }
+}

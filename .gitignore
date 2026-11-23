@@ -1,0 +1,28 @@
+.venv/
+__pycache__/
+*.pdf
+!wejscie/**/*.pdf
+.dev-konta.txt
+db.sqlite3
+frontend/node_modules/
+frontend/dist/
+staticfiles/
+.env
+deploy/backups/
+# dane klientów i materiały, które nie mogą trafić do gita (patrz HANDOFF → „Zanim publikujesz kod”):
+imprezy/
+wejscie/
+dla-klienta/
+prompty/
+media/
+lokale/*.png
+.pytest_cache/
+.hypothesis/
+.remember/
+# dokumentacja wewnętrzna (adresy serwerów, osoby, ustalenia z klientami) — zostaje w folderze projektu, nie w gicie
+HANDOFF.md
+SUMMARY.md
+docs-weryfikacja.md
+docs/
+# wewnętrzna instrukcja serwerów (IP, MAC, nazwy LXC) — nie do publicznego repo
+deploy/PROXMOX.md

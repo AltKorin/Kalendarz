@@ -1,0 +1,18 @@
+django>=6.1,<6.2
+inertia-django>=2.0
+django-vite>=3.2
+django-jazzmin>=3.0
+django-simple-history>=3.13
+python-docx
+openpyxl
+pymupdf  # wydruki kalendarza grup i imprez (przyjecia/druk.py)
+pillow
+gunicorn
+whitenoise
+authlib
+requests
+./vendor/agency_platform_core-0.3.0-py3-none-any.whl
+# testy
+hypothesis
+pytest
+pytest-django

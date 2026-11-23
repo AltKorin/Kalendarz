@@ -1,0 +1,172 @@
+{
+  "id": "menu-1",
+  "nazwa": "Menu imprezowe nr 1",
+  "cena_os": 180,
+  "cena_dziecko": null,
+  "_zrodlo": "Przykładowe menu imprezowe (dane fikcyjne; porcje i godziny to założenia).",
+  "etapy": [
+    {
+      "po_min": -90,
+      "dzial": "sala",
+      "miejsce": "sala",
+      "zadanie": "Ustawienie stołów i nakrycia",
+      "pozycje": [
+        "Stoły i krzesła na {goscie} os.",
+        "Obrusy, nakrycia, szkło",
+        "Dekoracje wg ustaleń z klientem"
+      ]
+    },
+    {
+      "po_min": -20,
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Zimna płyta na stoły",
+      "dania": [
+        {
+          "danie": "Wędliny długo dojrzewające z chutney chili/mango",
+          "porcja": 50,
+          "miara": "g"
+        },
+        {
+          "danie": "Tatar wołowy z pieczywem",
+          "porcja": 40,
+          "miara": "g"
+        },
+        {
+          "danie": "Tatar z buraka z awokado i mango",
+          "porcja": 40,
+          "miara": "g"
+        },
+        {
+          "danie": "Sałatka 3 sery",
+          "porcja": 60,
+          "miara": "g"
+        },
+        {
+          "danie": "Sałatka z wędzonym łososiem",
+          "porcja": 60,
+          "miara": "g"
+        },
+        {
+          "danie": "Sałatka Cezar",
+          "porcja": 60,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": -15,
+      "dzial": "bar",
+      "miejsce": "sala",
+      "zadanie": "Napoje na stoły",
+      "pozycje": [
+        "Woda z cytryną i miętą w karafkach",
+        "Lemoniada",
+        "Kawa i herbata Richmont — gotowe na życzenie"
+      ]
+    },
+    {
+      "po_min": 0,
+      "tytul": "Powitanie gości",
+      "dzial": "sala",
+      "miejsce": "sala",
+      "zadanie": "Powitanie gości, rozsadzenie"
+    },
+    {
+      "po_min": 15,
+      "tytul": "Obiad",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — przystawka",
+      "dania": [
+        {
+          "danie": "Wątróbka grillowana na grzance z rukolą i sosem malinowym",
+          "porcja": 100,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 45,
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — zupa",
+      "dania": [
+        {
+          "danie": "Rosół z mięs pieczonych z makaronem",
+          "porcja": 300,
+          "miara": "ml"
+        }
+      ]
+    },
+    {
+      "po_min": 75,
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — drugie danie",
+      "dania": [
+        {
+          "danie": "Schab z kością tradycyjny, purée ziemniaczane, kapusta zasmażana",
+          "porcja": 450,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 180,
+      "tytul": "Przystawka ciepła",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Przystawka ciepła na stoły",
+      "dania": [
+        {
+          "danie": "Pierogowa micha — pierogi babuni, dziadunia, krzyżackie i zielone",
+          "porcja": 160,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 240,
+      "tytul": "Danie ciepłe",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Danie ciepłe serwowane",
+      "dania": [
+        {
+          "danie": "Kurczak z rożna z ziemniakami opiekanymi i zestawem surówek",
+          "porcja": 400,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 300,
+      "tytul": "Ciasta i kawa",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Ciasta na stoły",
+      "dania": [
+        {
+          "danie": "Szarlotka domowa",
+          "porcja": 75,
+          "miara": "g"
+        },
+        {
+          "danie": "Suflet czekoladowy z sosem malinowym",
+          "porcja": 75,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 300,
+      "dzial": "bar",
+      "miejsce": "sala",
+      "zadanie": "Kawa i herbata do ciast",
+      "pozycje": [
+        "Kawa, herbata Richmont — {goscie} os."
+      ]
+    }
+  ]
+}

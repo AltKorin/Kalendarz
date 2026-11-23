@@ -1,0 +1,209 @@
+{
+  "_opis": "Demo bez logowania (przyjecia/demo.py). Nazwy fikcyjne — prawdziwych klientów w demo nie ma. 'dni' = przesunięcie od najbliższego piątku (weekendy wypadają w weekendy; 'od_dzis': true = od dziś), 'noce' = długość pobytu (brak = jeden dzień). Menu z pakiety/<pakiet>.json. Palety: Słownik Kolorów #026 (restauracja), #028 (hotel) — docs/PLAN-wersja-publiczna.md.",
+  "restauracja": {
+    "przycisk": "Restauracja",
+    "opis": "Przyjęcia okolicznościowe z menu: plan obsługi, ilości dla kuchni, agenda dla gości.",
+    "lokal": {
+      "nazwa": "Gospoda pod Lipą",
+      "podpis": "ul. Lipowa 1, Przykładowo",
+      "kontakt": "tel. 500 000 000 · gospoda@example.com",
+      "sala": "Sala bankietowa",
+      "kolory": {
+        "glowny": "5C3A2A",
+        "akcent": "B8721F",
+        "tlo_naglowka": "F7EFDF",
+        "linia": "E8962E"
+      }
+    },
+    "pakiety": [
+      "sami-swoi/menu-1",
+      "sami-swoi/menu-2"
+    ],
+    "przyjecia": [
+      {
+        "dni": -3,
+        "start": "13:00",
+        "klient": "Zielińscy",
+        "rodzaj": "stypa",
+        "doroslych": 32,
+        "menu": "Menu 2",
+        "status": "odbyla",
+        "od_dzis": true
+      },
+      {
+        "dni": 2,
+        "start": "14:00",
+        "klient": "Kowalscy",
+        "rodzaj": "komunia",
+        "doroslych": 38,
+        "dzieci": 6,
+        "menu": "Menu 1",
+        "status": "potwierdzona",
+        "tort": "17:30",
+        "zadatek": 1000,
+        "uwagi": "Bez glutenu: 2 os. Krzesełko dla niemowlęcia."
+      },
+      {
+        "dni": 1,
+        "start": "15:00",
+        "klient": "Nowakowie",
+        "rodzaj": "chrzciny",
+        "doroslych": 24,
+        "dzieci": 3,
+        "menu": "Menu 2",
+        "status": "wstepna",
+        "telefon": "600 000 001"
+      },
+      {
+        "dni": 7,
+        "start": "16:00",
+        "klient": "Firma Przykład sp. z o.o.",
+        "rodzaj": "spotkanie firmowe",
+        "doroslych": 45,
+        "menu": "Menu 1",
+        "status": "potwierdzona",
+        "zadatek": 2000
+      },
+      {
+        "dni": 9,
+        "start": "14:00",
+        "klient": "Wiśniewscy",
+        "rodzaj": "komunia",
+        "doroslych": 40,
+        "dzieci": 8,
+        "menu": "Menu 1",
+        "status": "wstepna",
+        "tort": "18:00"
+      },
+      {
+        "dni": 15,
+        "start": "17:00",
+        "klient": "70. urodziny pani Haliny",
+        "rodzaj": "urodziny",
+        "doroslych": 28,
+        "menu": "Menu 2",
+        "status": "potwierdzona",
+        "tort": "19:00",
+        "zadatek": 500
+      },
+      {
+        "dni": 22,
+        "start": "15:00",
+        "klient": "Jubileusz Koła Gospodyń",
+        "rodzaj": "jubileusz",
+        "doroslych": 60,
+        "menu": "Menu 2",
+        "status": "rezerwowa"
+      }
+    ]
+  },
+  "hotel": {
+    "przycisk": "Hotel",
+    "opis": "Grupy i imprezy kilkudniowe: kalendarz pon–nd do wydruku, kolizje terminów, wolne okna.",
+    "lokal": {
+      "nazwa": "Hotel Leśna Polana",
+      "podpis": "Leśna 10, Przykładowo",
+      "kontakt": "tel. 500 000 002 · recepcja@example.com",
+      "sala": "Restauracja",
+      "kolory": {
+        "glowny": "2B2D4A",
+        "akcent": "8B3A24",
+        "tlo_naglowka": "EEECF2",
+        "linia": "B07A5E"
+      }
+    },
+    "pakiety": [
+      "sami-swoi/menu-2"
+    ],
+    "przyjecia": [
+      {
+        "dni": 1,
+        "noce": 1,
+        "klient": "Gmina Przykładowo – szkolenie",
+        "rodzaj": "grupa",
+        "doroslych": 150,
+        "status": "potwierdzona",
+        "sale": "Sala Dębowa, Sala Kominkowa; Restauracja",
+        "uwagi": "Dokumenty dla obsługi gotowe: agenda, kierunki do sal, kuchnia, bar. Rachunki goście płacą osobno."
+      },
+      {
+        "dni": 2,
+        "start": "14:00",
+        "klient": "Kowalscy – komunia",
+        "rodzaj": "komunia",
+        "doroslych": 36,
+        "dzieci": 6,
+        "menu": "Menu 2",
+        "status": "potwierdzona",
+        "tort": "17:00"
+      },
+      {
+        "dni": 7,
+        "noce": 2,
+        "klient": "Weekend z muzyką",
+        "rodzaj": "pakiet hotelu",
+        "osoby_opis": "ok. 90",
+        "status": "potwierdzona",
+        "sale": "Restauracja, Tawerna",
+        "uwagi": "Zabawa z DJ-em, biesiada grillowa, koncert na misach."
+      },
+      {
+        "dni": 14,
+        "noce": 2,
+        "klient": "Weekend rodzinny",
+        "rodzaj": "pakiet hotelu",
+        "osoby_opis": "ok. 50",
+        "status": "potwierdzona",
+        "sale": "Restauracja, Tawerna",
+        "uwagi": "Ognisko, sobotnia zabawa z upominkiem dla dzieci."
+      },
+      {
+        "dni": 21,
+        "noce": 2,
+        "klient": "Dwie grupy",
+        "rodzaj": "grupa",
+        "osoby_opis": "ok. 60",
+        "status": "wstepna",
+        "sale": "do ustalenia",
+        "uwagi": "Termin i szczegóły do potwierdzenia."
+      },
+      {
+        "dni": 28,
+        "noce": 2,
+        "klient": "Urodziny hotelu",
+        "rodzaj": "pakiet hotelu",
+        "osoby_opis": "ok. 40?",
+        "status": "potwierdzona"
+      },
+      {
+        "dni": 33,
+        "noce": 4,
+        "klient": "Długi weekend świąteczny",
+        "rodzaj": "święta",
+        "osoby_opis": "cały hotel bez bungalowów (planujemy)",
+        "status": "rezerwowa",
+        "sale": "Restauracja",
+        "uwagi": "Bungalowy na liście rezerwowej — decyzja wg prognozy pogody (przy mrozach ich nie sprzedajemy)."
+      },
+      {
+        "dni": 42,
+        "noce": 3,
+        "klient": "Bal karnawałowy",
+        "rodzaj": "święta",
+        "osoby_opis": "cały hotel (planujemy)",
+        "status": "potwierdzona",
+        "sale": "Restauracja, Tawerna",
+        "uwagi": "Bal z DJ-em i pokaz ogni, brunch w niedzielę."
+      },
+      {
+        "dni": 45,
+        "noce": 4,
+        "klient": "Ferie – grupa szkolna",
+        "rodzaj": "grupa",
+        "osoby_opis": "ok. 40?",
+        "status": "potwierdzona",
+        "uwagi": "Nakłada się z balem: wyjazd i przyjazd tego samego dnia."
+      }
+    ]
+  }
+}

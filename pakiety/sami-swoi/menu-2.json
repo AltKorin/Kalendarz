@@ -1,0 +1,236 @@
+{
+  "id": "menu-2",
+  "nazwa": "Menu imprezowe nr 2",
+  "cena_os": 250,
+  "cena_dziecko": null,
+  "_zrodlo": "Przykładowe menu imprezowe (dane fikcyjne; porcje i godziny to założenia).",
+  "etapy": [
+    {
+      "po_min": -90,
+      "dzial": "sala",
+      "miejsce": "sala",
+      "zadanie": "Ustawienie stołów i nakrycia",
+      "pozycje": [
+        "Stoły i krzesła na {goscie} os.",
+        "Obrusy, nakrycia, szkło",
+        "Miejsce na podgrzewacze",
+        "Dekoracje wg ustaleń z klientem"
+      ]
+    },
+    {
+      "po_min": -20,
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Zimna płyta i deska wędlin na stoły",
+      "dania": [
+        {
+          "danie": "Tatar wołowy",
+          "porcja": 30,
+          "miara": "g"
+        },
+        {
+          "danie": "Tatar z buraka",
+          "porcja": 30,
+          "miara": "g"
+        },
+        {
+          "danie": "Wątróbka grillowana na grzance z sosem malinowym",
+          "porcja": 40,
+          "miara": "g"
+        },
+        {
+          "danie": "Krewetki chipotles z grzankami",
+          "porcja": 30,
+          "miara": "g"
+        },
+        {
+          "danie": "Łosoś z chutney mango/chili",
+          "porcja": 40,
+          "miara": "g"
+        },
+        {
+          "danie": "Sałatka 3 sery",
+          "porcja": 50,
+          "miara": "g"
+        },
+        {
+          "danie": "Sałatka z wędzonym łososiem",
+          "porcja": 50,
+          "miara": "g"
+        },
+        {
+          "danie": "Sałatka Cezar",
+          "porcja": 50,
+          "miara": "g"
+        },
+        {
+          "danie": "Przystawka sezonowa 1 (do ustalenia)",
+          "porcja": 40,
+          "miara": "g"
+        },
+        {
+          "danie": "Przystawka sezonowa 2 (do ustalenia)",
+          "porcja": 40,
+          "miara": "g"
+        },
+        {
+          "danie": "Deska wędlin: wędliny długo dojrzewające, pieczywo, chrzan, musztarda",
+          "porcja": 80,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": -15,
+      "dzial": "bar",
+      "miejsce": "sala",
+      "zadanie": "Napoje na stoły",
+      "pozycje": [
+        "Woda z cytryną i miętą w karafkach",
+        "Lemoniada",
+        "Kawa i herbata Richmont — gotowe na życzenie"
+      ]
+    },
+    {
+      "po_min": 0,
+      "tytul": "Powitanie gości",
+      "dzial": "sala",
+      "miejsce": "sala",
+      "zadanie": "Powitanie gości, rozsadzenie"
+    },
+    {
+      "po_min": 15,
+      "tytul": "Obiad",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — przystawka",
+      "dania": [
+        {
+          "danie": "Camembert grillowany z wędliną długo dojrzewającą",
+          "porcja": 100,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 45,
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — zupa",
+      "dania": [
+        {
+          "danie": "Żurek chrzanowy z purée ziemniaczanym i jajkiem poché",
+          "porcja": 300,
+          "miara": "ml"
+        }
+      ]
+    },
+    {
+      "po_min": 75,
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — drugie danie",
+      "dania": [
+        {
+          "danie": "Schab Grunwaldzki z boczkiem, cebulą i wędzonym serem, ziemniaki opiekane",
+          "porcja": 400,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 180,
+      "tytul": "Danie ciepłe",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Drugie danie ciepłe serwowane",
+      "dania": [
+        {
+          "danie": "Kurczak z rożna z surówkami",
+          "porcja": 300,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 210,
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Podgrzewacze — do końca przyjęcia",
+      "dania": [
+        {
+          "danie": "Bogracz węgierski",
+          "porcja": 250,
+          "miara": "ml"
+        },
+        {
+          "danie": "Żeberko BBQ",
+          "porcja": 150,
+          "miara": "g"
+        },
+        {
+          "danie": "Purée ziemniaczane",
+          "porcja": 100,
+          "miara": "g"
+        },
+        {
+          "danie": "Zestaw surówek",
+          "porcja": 80,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 270,
+      "tytul": "Trzecie danie ciepłe",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Trzecie danie ciepłe serwowane",
+      "dania": [
+        {
+          "danie": "Gulasz z dzika w kociołku z pieczywem",
+          "porcja": 200,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 330,
+      "tytul": "Ciasta i kawa",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Ciasta i desery na stoły",
+      "dania": [
+        {
+          "danie": "Szarlotka domowa",
+          "porcja": 50,
+          "miara": "g"
+        },
+        {
+          "danie": "Suflet czekoladowy z sosem malinowym",
+          "porcja": 50,
+          "miara": "g"
+        },
+        {
+          "danie": "Crème brûlée",
+          "porcja": 50,
+          "miara": "g"
+        },
+        {
+          "danie": "Naleśniki z owocami",
+          "porcja": 50,
+          "miara": "g"
+        }
+      ]
+    },
+    {
+      "po_min": 330,
+      "dzial": "bar",
+      "miejsce": "sala",
+      "zadanie": "Kawa i herbata do ciast",
+      "pozycje": [
+        "Kawa, herbata Richmont — {goscie} os."
+      ]
+    }
+  ]
+}

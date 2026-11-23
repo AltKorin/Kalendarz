@@ -1,0 +1,13 @@
+.venv
+**/node_modules
+frontend/dist
+db.sqlite3
+staticfiles
+.env
+.remember
+**/__pycache__
+imprezy
+wejscie
+dla-klienta
+deploy/cloudflared
+deploy/backups
