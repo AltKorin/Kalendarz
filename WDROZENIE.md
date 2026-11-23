@@ -19,6 +19,9 @@ Wybierz tryb pracy:
 | wspólna instancja (wielu klientów) | `KALENDARZ_LOKAL=` (puste), `KALENDARZ_PUBLICZNY=1`, `DEMO_MAX=200` | strona publiczna z demo; lokale zakłada logowanie przez Konto |
 
 Pojedynczy lokal zmieniasz potem w panelu (Ustawienia): nazwa, adres, kontakt, sala, kolory, logo.
+
+Bez HTTPS (pierwsze uruchomienie na laptopie): ustaw `DJANGO_SSL_REDIRECT=0` i `DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1`.
+Z `DJANGO_SSL_REDIRECT=1` bez proxy aplikacja przekieruje na https, którego jeszcze nie ma.
 Menu startowe to tylko skrót — wszystko da się edytować i usunąć w panelu.
 
 ## 2. Start
