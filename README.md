@@ -1,5 +1,7 @@
 # Kalendarz przyjęć
 
+[![CI](https://github.com/AltKorin/Kalendarz/actions/workflows/ci.yml/badge.svg)](https://github.com/AltKorin/Kalendarz/actions/workflows/ci.yml)
+
 Kalendarz przyjęć i terminów grup dla restauracji i hoteli:
 
 - **przyjęcia z menu** — wycena, ilości dla kuchni (porcja × goście), plan obsługi dla kuchni, sali i baru,
