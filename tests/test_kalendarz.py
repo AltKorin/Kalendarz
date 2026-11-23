@@ -43,7 +43,7 @@ def test_zle_odwolania_i_puste_pola():
     x = dane()
     x["obowiazki"][0].update(dzial="nieznany", menu="brak", zadanie="  ")
     x["program"][0]["sala"] = "piwnica"
-    x["program"][1]["od"] = "25:00"
+    x["program"][1]["od"] = "xx:yy"
     bledy = " ".join(k.sprawdz(x))
     for fraza in ("nieznany dział", "nieznane menu", "puste zadanie", "nieznana sala", "zła godzina"):
         assert fraza in bledy
