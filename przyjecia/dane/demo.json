@@ -16,8 +16,8 @@
       }
     },
     "pakiety": [
-      "sami-swoi/menu-1",
-      "sami-swoi/menu-2"
+      "demo/menu-1",
+      "demo/menu-2"
     ],
     "przyjecia": [
       {
@@ -113,7 +113,7 @@
       }
     },
     "pakiety": [
-      "sami-swoi/menu-2"
+      "demo/menu-2"
     ],
     "przyjecia": [
       {

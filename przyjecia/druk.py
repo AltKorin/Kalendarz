@@ -1,6 +1,6 @@
 """Wydruki kalendarza grup i imprez — czarno-białe A4 (kolorowa drukarka w hotelu nie działa, oszczędnie w tonerze).
 
-Wzór: prototyp z Hotelu Niedźwiadek 19.11.2026 (`wejscie/niedzwiadek-mail-2026-11-21/generuj-*.py`, zaakceptowany).
+Wzór: prototyp zaakceptowany przez hotel w listopadzie 2026 (czarno-biały wydruk do rozdania pracownikom).
 Trzy widoki:
 - `lista`     — A4 pionowo, termin / impreza / osoby (ok.), do rozdania pracownikom,
 - `kalendarz` — A4 poziomo, siatka pon–nd (8 tygodni na stronę), paski imprez, „dziś”, wstępne przerywaną linią,

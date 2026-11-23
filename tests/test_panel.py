@@ -19,7 +19,7 @@ from tests.conftest import czlonek
 
 def menu_1(lokal=None):
     lokal = lokal or Lokal.objects.first() or Lokal.objects.create(nazwa="Restauracja Testowa")
-    return uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/sami-swoi/menu-1.json").read_text()), lokal)
+    return uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/demo/menu-1.json").read_text()), lokal)
 
 
 def przyjecie(menu, **kw):
@@ -65,7 +65,7 @@ def test_menu_w_uzyciu_nie_do_usuniecia():
 @pytest.mark.django_db
 def test_seed_menu_idempotentny():
     menu_1()
-    assert uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/sami-swoi/menu-1.json").read_text()),
+    assert uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/demo/menu-1.json").read_text()),
                                  Lokal.objects.get()) is None
     assert Menu.objects.count() == 1
 

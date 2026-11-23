@@ -14,7 +14,7 @@ from przyjecia import uslugi
 from przyjecia.models import Czlonek, Lokal, Menu, Przyjecie
 from tests.conftest import czlonek
 
-PAKIET = json.loads((uslugi.KATALOG / "pakiety/sami-swoi/menu-1.json").read_text())
+PAKIET = json.loads((uslugi.KATALOG / "pakiety/demo/menu-1.json").read_text())
 
 
 @pytest.fixture

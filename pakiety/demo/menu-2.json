@@ -3,7 +3,7 @@
   "nazwa": "Menu imprezowe nr 2",
   "cena_os": 250,
   "cena_dziecko": null,
-  "_zrodlo": "Przykładowe menu imprezowe (dane fikcyjne; porcje i godziny to założenia).",
+  "_zrodlo": "Przykładowe menu imprezowe (dane fikcyjne; porcje i godziny to założenia do ustalenia z kuchnią).",
   "etapy": [
     {
       "po_min": -90,
@@ -24,57 +24,57 @@
       "zadanie": "Zimna płyta i deska wędlin na stoły",
       "dania": [
         {
-          "danie": "Tatar wołowy",
+          "danie": "Sernik z brzoskwiniami",
           "porcja": 30,
           "miara": "g"
         },
         {
-          "danie": "Tatar z buraka",
+          "danie": "Szarlotka z bitą śmietaną",
           "porcja": 30,
           "miara": "g"
         },
         {
-          "danie": "Wątróbka grillowana na grzance z sosem malinowym",
+          "danie": "Tort weselny",
           "porcja": 40,
           "miara": "g"
         },
         {
-          "danie": "Krewetki chipotles z grzankami",
+          "danie": "Owoce sezonowe",
           "porcja": 30,
           "miara": "g"
         },
         {
-          "danie": "Łosoś z chutney mango/chili",
+          "danie": "Lody z owocami",
           "porcja": 40,
           "miara": "g"
         },
         {
-          "danie": "Sałatka 3 sery",
+          "danie": "Sałatka z pieczoną burakiem i kozim serem",
           "porcja": 50,
           "miara": "g"
         },
         {
-          "danie": "Sałatka z wędzonym łososiem",
+          "danie": "Pieczona kaczka z jabłkami",
           "porcja": 50,
           "miara": "g"
         },
         {
-          "danie": "Sałatka Cezar",
+          "danie": "Schab w sosie grzybowym",
           "porcja": 50,
           "miara": "g"
         },
         {
-          "danie": "Przystawka sezonowa 1 (do ustalenia)",
+          "danie": "Kompot z owoców sezonowych",
           "porcja": 40,
           "miara": "g"
         },
         {
-          "danie": "Przystawka sezonowa 2 (do ustalenia)",
+          "danie": "Kawa i herbata",
           "porcja": 40,
           "miara": "g"
         },
         {
-          "danie": "Deska wędlin: wędliny długo dojrzewające, pieczywo, chrzan, musztarda",
+          "danie": "Woda mineralna",
           "porcja": 80,
           "miara": "g"
         }
@@ -106,7 +106,7 @@
       "zadanie": "Obiad serwowany — przystawka",
       "dania": [
         {
-          "danie": "Camembert grillowany z wędliną długo dojrzewającą",
+          "danie": "Sok pomarańczowy",
           "porcja": 100,
           "miara": "g"
         }
@@ -119,7 +119,7 @@
       "zadanie": "Obiad serwowany — zupa",
       "dania": [
         {
-          "danie": "Żurek chrzanowy z purée ziemniaczanym i jajkiem poché",
+          "danie": "Krem z dyni z prażonymi pestkami (wersja 2)",
           "porcja": 300,
           "miara": "ml"
         }
@@ -132,7 +132,7 @@
       "zadanie": "Obiad serwowany — drugie danie",
       "dania": [
         {
-          "danie": "Schab Grunwaldzki z boczkiem, cebulą i wędzonym serem, ziemniaki opiekane",
+          "danie": "Tatar z polędwicy z ogórkiem (wersja 2)",
           "porcja": 400,
           "miara": "g"
         }
@@ -146,7 +146,7 @@
       "zadanie": "Drugie danie ciepłe serwowane",
       "dania": [
         {
-          "danie": "Kurczak z rożna z surówkami",
+          "danie": "Sałatka z pieczoną burakiem i kozim serem (wersja 2)",
           "porcja": 300,
           "miara": "g"
         }
@@ -159,22 +159,22 @@
       "zadanie": "Podgrzewacze — do końca przyjęcia",
       "dania": [
         {
-          "danie": "Bogracz węgierski",
+          "danie": "Pieczona kaczka z jabłkami (wersja 2)",
           "porcja": 250,
           "miara": "ml"
         },
         {
-          "danie": "Żeberko BBQ",
+          "danie": "Schab w sosie grzybowym (wersja 2)",
           "porcja": 150,
           "miara": "g"
         },
         {
-          "danie": "Purée ziemniaczane",
+          "danie": "Pierogi z kapustą i grzybami (wersja 2)",
           "porcja": 100,
           "miara": "g"
         },
         {
-          "danie": "Zestaw surówek",
+          "danie": "Ryba po grecku (wersja 2)",
           "porcja": 80,
           "miara": "g"
         }
@@ -188,7 +188,7 @@
       "zadanie": "Trzecie danie ciepłe serwowane",
       "dania": [
         {
-          "danie": "Gulasz z dzika w kociołku z pieczywem",
+          "danie": "Kotlet schabowy z puree (wersja 2)",
           "porcja": 200,
           "miara": "g"
         }
@@ -202,22 +202,22 @@
       "zadanie": "Ciasta i desery na stoły",
       "dania": [
         {
-          "danie": "Szarlotka domowa",
+          "danie": "Żeberka w marynacie miodowej",
           "porcja": 50,
           "miara": "g"
         },
         {
-          "danie": "Suflet czekoladowy z sosem malinowym",
+          "danie": "Placki ziemniaczane ze śmietaną",
           "porcja": 50,
           "miara": "g"
         },
         {
-          "danie": "Crème brûlée",
+          "danie": "Gulasz wołowy z kaszą (wersja 2)",
           "porcja": 50,
           "miara": "g"
         },
         {
-          "danie": "Naleśniki z owocami",
+          "danie": "Kurczak w ziołach z warzywami (wersja 2)",
           "porcja": 50,
           "miara": "g"
         }

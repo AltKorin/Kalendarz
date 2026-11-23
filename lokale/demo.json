@@ -1,9 +1,9 @@
 {
-  "id": "sami-swoi",
+  "id": "demo",
   "nazwa": "Restauracja Przykładowa",
   "podpis": "ul. Przykładowa 1, Miasto",
   "kontakt": "tel. 500 000 000 · lokal@example.com",
-  "logo": "sami-swoi-logo.png",
+  "logo": "",
   "fonty": {
     "_zrodlo": "Krój z logo lokalu; tekst uzupełniający bezszeryfowy.",
     "tytul": "Bookman Old Style",

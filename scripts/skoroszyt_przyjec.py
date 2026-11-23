@@ -1,6 +1,6 @@
 """Skoroszyt Excel „Kalendarz przyjęć” do samodzielnego wypełniania przez restaurację (wersja przed panelem).
 
-Użycie:  python3 scripts/skoroszyt_przyjec.py sami-swoi
+Użycie:  python3 scripts/skoroszyt_przyjec.py demo
 Wynik:   dla-klienta/<lokal>/Kalendarz przyjęć – <nazwa>.xlsx
 
 Dane bierze z lokale/<lokal>.json i pakiety/<lokal>/*.json — zmiana menu = zmiana JSON i ponowne uruchomienie
@@ -365,4 +365,4 @@ def main(lokal_id):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "sami-swoi")
+    main(sys.argv[1] if len(sys.argv) > 1 else "demo")

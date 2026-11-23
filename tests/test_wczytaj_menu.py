@@ -15,7 +15,7 @@ from przyjecia.models import Lokal, Menu
 
 @pytest.fixture(autouse=True)
 def jeden_lokal(settings, tmp_path):
-    settings.KALENDARZ_LOKAL = "sami-swoi"
+    settings.KALENDARZ_LOKAL = "demo"
     settings.MEDIA_ROOT = tmp_path
 
 
@@ -59,7 +59,7 @@ def test_kolejne_uruchomienia_nic_nie_dodaja(db):
 def test_pierwszy_start_zaklada_lokal_z_pliku_z_logo(db):
     uruchom()
     lokal = Lokal.objects.get()
-    assert lokal.nazwa == "Restauracja Sami Swoi" and lokal.logo and lokal.sala == "Sala bankietowa"
+    assert lokal.nazwa == "Restauracja Przykładowa" and lokal.sala == "Sala bankietowa"
     assert set(Menu.objects.values_list("lokal", flat=True)) == {lokal.pk}
 
 

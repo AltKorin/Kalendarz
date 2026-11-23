@@ -14,7 +14,7 @@ def do_lokalu(apps, schema_editor):
     konta = User.objects.filter(is_superuser=False)
     if not (Menu.objects.exists() or Przyjecie.objects.exists() or konta.exists()):
         return
-    plik = Path(settings.BASE_DIR) / "lokale" / f"{getattr(settings, 'KALENDARZ_LOKAL', '') or 'sami-swoi'}.json"
+    plik = Path(settings.BASE_DIR) / "lokale" / f"{getattr(settings, 'KALENDARZ_LOKAL', '') or 'demo'}.json"
     dane = json.loads(plik.read_text(encoding="utf-8")) if plik.exists() else {"nazwa": "Mój lokal"}
     kolory = {k: v for k, v in dane.get("kolory", {}).items() if not k.startswith("_")}
     fonty = {k: v for k, v in dane.get("fonty", {}).items() if not k.startswith("_")}

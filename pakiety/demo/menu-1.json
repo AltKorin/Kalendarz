@@ -3,7 +3,7 @@
   "nazwa": "Menu imprezowe nr 1",
   "cena_os": 180,
   "cena_dziecko": null,
-  "_zrodlo": "Przykładowe menu imprezowe (dane fikcyjne; porcje i godziny to założenia).",
+  "_zrodlo": "Przykładowe menu imprezowe (dane fikcyjne; porcje i godziny to założenia do ustalenia z kuchnią).",
   "etapy": [
     {
       "po_min": -90,
@@ -23,32 +23,32 @@
       "zadanie": "Zimna płyta na stoły",
       "dania": [
         {
-          "danie": "Wędliny długo dojrzewające z chutney chili/mango",
+          "danie": "Rosół z makaronem i zieleniną",
           "porcja": 50,
           "miara": "g"
         },
         {
-          "danie": "Tatar wołowy z pieczywem",
+          "danie": "Krem z dyni z prażonymi pestkami",
           "porcja": 40,
           "miara": "g"
         },
         {
-          "danie": "Tatar z buraka z awokado i mango",
+          "danie": "Tatar z polędwicy z ogórkiem",
           "porcja": 40,
           "miara": "g"
         },
         {
-          "danie": "Sałatka 3 sery",
+          "danie": "Sałatka z pieczoną burakiem i kozim serem",
           "porcja": 60,
           "miara": "g"
         },
         {
-          "danie": "Sałatka z wędzonym łososiem",
+          "danie": "Pieczona kaczka z jabłkami",
           "porcja": 60,
           "miara": "g"
         },
         {
-          "danie": "Sałatka Cezar",
+          "danie": "Schab w sosie grzybowym",
           "porcja": 60,
           "miara": "g"
         }
@@ -80,7 +80,7 @@
       "zadanie": "Obiad serwowany — przystawka",
       "dania": [
         {
-          "danie": "Wątróbka grillowana na grzance z rukolą i sosem malinowym",
+          "danie": "Pierogi z kapustą i grzybami",
           "porcja": 100,
           "miara": "g"
         }
@@ -93,7 +93,7 @@
       "zadanie": "Obiad serwowany — zupa",
       "dania": [
         {
-          "danie": "Rosół z mięs pieczonych z makaronem",
+          "danie": "Ryba po grecku",
           "porcja": 300,
           "miara": "ml"
         }
@@ -106,7 +106,7 @@
       "zadanie": "Obiad serwowany — drugie danie",
       "dania": [
         {
-          "danie": "Schab z kością tradycyjny, purée ziemniaczane, kapusta zasmażana",
+          "danie": "Kotlet schabowy z puree",
           "porcja": 450,
           "miara": "g"
         }
@@ -120,7 +120,7 @@
       "zadanie": "Przystawka ciepła na stoły",
       "dania": [
         {
-          "danie": "Pierogowa micha — pierogi babuni, dziadunia, krzyżackie i zielone",
+          "danie": "Gulasz wołowy z kaszą",
           "porcja": 160,
           "miara": "g"
         }
@@ -134,7 +134,7 @@
       "zadanie": "Danie ciepłe serwowane",
       "dania": [
         {
-          "danie": "Kurczak z rożna z ziemniakami opiekanymi i zestawem surówek",
+          "danie": "Kurczak w ziołach z warzywami",
           "porcja": 400,
           "miara": "g"
         }
@@ -148,12 +148,12 @@
       "zadanie": "Ciasta na stoły",
       "dania": [
         {
-          "danie": "Szarlotka domowa",
+          "danie": "Żeberka w marynacie miodowej",
           "porcja": 75,
           "miara": "g"
         },
         {
-          "danie": "Suflet czekoladowy z sosem malinowym",
+          "danie": "Placki ziemniaczane ze śmietaną",
           "porcja": 75,
           "miara": "g"
         }

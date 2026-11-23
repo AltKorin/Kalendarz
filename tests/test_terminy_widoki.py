@@ -43,7 +43,7 @@ def test_termin_odrzuca_zle_dane(client, hotel, dane, pole):
 
 
 def test_przyjecie_z_menu_nadal_wymaga_godziny_i_doroslych(client, hotel):
-    menu = uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/sami-swoi/menu-1.json").read_text()), hotel)
+    menu = uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/demo/menu-1.json").read_text()), hotel)
     r = post(client, {"data": "2026-12-05", "klient": "Nowak", "menu": menu.pk, "status": "wstepna"})
     assert {"start", "doroslych"} <= set(r.json()["props"]["bledy"])
 

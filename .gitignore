@@ -16,6 +16,10 @@ dla-klienta/
 prompty/
 media/
 lokale/*.png
+# pakiety i lokal konkretnego klienta — nie do repo
+pakiety/sami-swoi/
+lokale/*.json
+!lokale/demo.json
 .pytest_cache/
 .hypothesis/
 .remember/

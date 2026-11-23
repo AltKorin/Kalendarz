@@ -30,8 +30,8 @@ def api(settings, db):
     cache.clear()
     lokal = Lokal.objects.create(nazwa="Sami Swoi", firma=FIRMA)
     obcy = Lokal.objects.create(nazwa="Obcy", firma="inna-firma")
-    menu = uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/sami-swoi/menu-1.json").read_text()), lokal)
-    obce_menu = uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/sami-swoi/menu-1.json").read_text()), obcy)
+    menu = uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/demo/menu-1.json").read_text()), lokal)
+    obce_menu = uslugi.wczytaj_pakiet(json.loads((uslugi.KATALOG / "pakiety/demo/menu-1.json").read_text()), obcy)
     Przyjecie.objects.create(lokal=obcy, data=date(2026, 11, 21), start=time(12), klient="Obcy", doroslych=5,
                              menu=obce_menu, cena_os=1, rodzaj="stypa")
     for dzien, klient, status in [(21, "Nowak", "wstepna"), (22, "Kowalscy", "potwierdzona"), (22, "Odwołani", "odwolana"),

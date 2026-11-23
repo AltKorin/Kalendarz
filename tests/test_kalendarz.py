@@ -94,8 +94,8 @@ def test_ilosc_to_porcja_razy_osoby(porcja, osoby):
 @given(st.integers(1, 120), st.integers(0, 30), st.sampled_from(["menu-1", "menu-2"]),
        st.sampled_from(["12:00", "14:00", "17:30"]))
 def test_nowa_impreza_zawsze_poprawna(dorosli, dzieci, pakiet, godz):
-    d = k.nowa_impreza("sami-swoi", pakiet, "2026-11-22", godz, dorosli, "Test", dzieci=dzieci, tort="18:00")
-    d["lokal"] = k.json.loads((k.KATALOG / "lokale/sami-swoi.json").read_text(encoding="utf-8"))
+    d = k.nowa_impreza("demo", pakiet, "2026-11-22", godz, dorosli, "Test", dzieci=dzieci, tort="18:00")
+    d["lokal"] = k.json.loads((k.KATALOG / "lokale/demo.json").read_text(encoding="utf-8"))
     assert k.sprawdz(d) == []
     assert d["liczba_osob"] == dorosli + dzieci
     assert any(p["tytul"] == "Tort" for p in d["program"])
@@ -104,4 +104,4 @@ def test_nowa_impreza_zawsze_poprawna(dorosli, dzieci, pakiet, godz):
 @pytest.mark.parametrize("dorosli,klient", [(0, "X"), (-3, "X"), (10, "   ")])
 def test_nowa_impreza_odrzuca_bzdury(dorosli, klient):
     with pytest.raises(ValueError):
-        k.nowa_impreza("sami-swoi", "menu-1", "2026-11-22", "14:00", dorosli, klient)
+        k.nowa_impreza("demo", "menu-1", "2026-11-22", "14:00", dorosli, klient)
