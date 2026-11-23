@@ -8,15 +8,15 @@ from hypothesis import given, strategies as st
 sys.path.insert(0, str(Path(__file__).parent.parent))
 import kalendarz as k  # noqa: E402
 
-KOLBUDY = Path(__file__).parent.parent / "imprezy/2026-11-21-kolbudy/impreza.json"
+PRZYKLAD = Path(__file__).parent / "dane/impreza-przyklad.json"  # fikcyjna impreza z demo menu
 godzina = st.builds(lambda h, m: f"{h:02d}:{m:02d}", st.integers(0, 23), st.integers(0, 59))
 
 
 def dane():
-    return copy.deepcopy(k.wczytaj(KOLBUDY))
+    return copy.deepcopy(k.wczytaj(PRZYKLAD))
 
 
-def test_kolbudy_bez_bledow():
+def test_przyklad_bez_bledow():
     assert k.sprawdz(dane()) == []
 
 
@@ -42,7 +42,7 @@ def test_dzien_poza_imprezą_to_blad(d):
 def test_zle_odwolania_i_puste_pola():
     x = dane()
     x["obowiazki"][0].update(dzial="nieznany", menu="brak", zadanie="  ")
-    x["program"][0]["sesje"][0]["sala"] = "piwnica"
+    x["program"][0]["sala"] = "piwnica"
     x["program"][1]["od"] = "25:00"
     bledy = " ".join(k.sprawdz(x))
     for fraza in ("nieznany dział", "nieznane menu", "puste zadanie", "nieznana sala", "zła godzina"):

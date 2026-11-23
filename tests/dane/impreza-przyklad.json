@@ -1,0 +1,236 @@
+{
+  "lokal": "demo",
+  "nazwa": "Spotkanie firmowe — Przykładowa grupa",
+  "klient": "Przykładowa grupa",
+  "typ": "spotkanie firmowe",
+  "od": "2026-11-21",
+  "do": "2026-11-21",
+  "liczba_osob": 162,
+  "zrodla": [
+    "Menu: Menu imprezowe nr 1 (Przykładowe menu imprezowe (dane fikcyjne; porcje i godziny to założenia do ustalenia z kuchnią).)"
+  ],
+  "grupy": {},
+  "program": [
+    {
+      "dzien": "2026-11-21",
+      "od": "14:00",
+      "tytul": "Powitanie gości",
+      "sala": "sala",
+      "opis": [
+        "Na stołach: Rosół z makaronem i zieleniną · Krem z dyni z prażonymi pestkami · Tatar z polędwicy z ogórkiem · Sałatka z pieczoną burakiem i kozim serem · Pieczona kaczka z jabłkami · Schab w sosie grzybowym"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "14:15",
+      "tytul": "Obiad",
+      "sala": "sala",
+      "opis": [
+        "Pierogi z kapustą i grzybami",
+        "Ryba po grecku",
+        "Kotlet schabowy z puree"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "17:00",
+      "tytul": "Przystawka ciepła",
+      "sala": "sala",
+      "opis": [
+        "Gulasz wołowy z kaszą"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "17:30",
+      "tytul": "Tort",
+      "sala": "sala"
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "18:00",
+      "tytul": "Danie ciepłe",
+      "sala": "sala",
+      "opis": [
+        "Kurczak w ziołach z warzywami"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "19:00",
+      "tytul": "Ciasta i kawa",
+      "sala": "sala",
+      "opis": [
+        "Żeberka w marynacie miodowej · Placki ziemniaczane ze śmietaną"
+      ]
+    }
+  ],
+  "menu": {},
+  "obowiazki": [
+    {
+      "dzien": "2026-11-21",
+      "od": "12:30",
+      "dzial": "sala",
+      "miejsce": "sala",
+      "zadanie": "Ustawienie stołów i nakrycia",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Stoły i krzesła na 162 os.",
+        "Obrusy, nakrycia, szkło",
+        "Dekoracje wg ustaleń z klientem"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "13:40",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Zimna płyta na stoły",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Rosół z makaronem i zieleniną: 50 g × 162 os. = 8,1 kg",
+        "Krem z dyni z prażonymi pestkami: 40 g × 162 os. = 6,48 kg",
+        "Tatar z polędwicy z ogórkiem: 40 g × 162 os. = 6,48 kg",
+        "Sałatka z pieczoną burakiem i kozim serem: 60 g × 162 os. = 9,72 kg",
+        "Pieczona kaczka z jabłkami: 60 g × 162 os. = 9,72 kg",
+        "Schab w sosie grzybowym: 60 g × 162 os. = 9,72 kg"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "13:45",
+      "dzial": "bar",
+      "miejsce": "sala",
+      "zadanie": "Napoje na stoły",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Woda z cytryną i miętą w karafkach",
+        "Lemoniada",
+        "Kawa i herbata Richmont — gotowe na życzenie"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "14:00",
+      "dzial": "sala",
+      "miejsce": "sala",
+      "zadanie": "Powitanie gości, rozsadzenie",
+      "osoby": "162 os.",
+      "pozycje": []
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "14:15",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — przystawka",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Pierogi z kapustą i grzybami: 100 g × 162 os. = 16,2 kg"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "14:45",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — zupa",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Ryba po grecku: 300 ml × 162 os. = 48,6 l"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "15:15",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Obiad serwowany — drugie danie",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Kotlet schabowy z puree: 450 g × 162 os. = 72,9 kg"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "17:00",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Przystawka ciepła na stoły",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Gulasz wołowy z kaszą: 160 g × 162 os. = 25,92 kg"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "18:00",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Danie ciepłe serwowane",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Kurczak w ziołach z warzywami: 400 g × 162 os. = 64,8 kg"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "19:00",
+      "dzial": "kuchnia",
+      "miejsce": "sala",
+      "zadanie": "Ciasta na stoły",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Żeberka w marynacie miodowej: 75 g × 162 os. = 12,15 kg",
+        "Placki ziemniaczane ze śmietaną: 75 g × 162 os. = 12,15 kg"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "19:00",
+      "dzial": "bar",
+      "miejsce": "sala",
+      "zadanie": "Kawa i herbata do ciast",
+      "osoby": "162 os.",
+      "pozycje": [
+        "Kawa, herbata Richmont — 162 os."
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "17:15",
+      "dzial": "sala",
+      "miejsce": "sala",
+      "zadanie": "Tort o 17:30 — przygotować podanie",
+      "pozycje": [
+        "Talerzyki deserowe i widelczyki — 162 os.",
+        "Nóż i łopatka do tortu",
+        "Kto dostarcza tort i o której — do potwierdzenia"
+      ]
+    },
+    {
+      "dzien": "2026-11-21",
+      "od": "12:00",
+      "dzial": "kuchnia",
+      "miejsce": "kuchnia",
+      "zadanie": "Diety i alergie — UWAGA",
+      "pozycje": [
+        "Bez glutenu: 2 os."
+      ]
+    }
+  ],
+  "wycena": {
+    "pakiet": "Menu imprezowe nr 1 – 180 zł/os.",
+    "cena_os": 180,
+    "cena_dziecko": null,
+    "doroslych": 150,
+    "dzieci": 12,
+    "zadatek": 1000
+  },
+  "do_potwierdzenia": [
+    "Godziny etapów to propozycja z pakietu — ustal z klientem i popraw w impreza.json.",
+    "Porcje na osobę to założenia z kalkulatora — potwierdź z kuchnią.",
+    "Dzieci liczone w ilościach jako pełna porcja.",
+    "Cena dla dzieci nieustalona — nie wliczona do wyceny."
+  ]
+}
