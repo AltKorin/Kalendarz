@@ -1,7 +1,7 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
 
-from .models import Etap, Menu, Pozycja, Przyjecie
+from .models import Etap, Menu, Pozycja, Przyjecie, Rezerwacja, Stolik
 
 
 class EtapInline(admin.TabularInline):
@@ -44,3 +44,17 @@ class AkceptacjaRegulaminuAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(Stolik)
+class StolikAdmin(SimpleHistoryAdmin):
+    list_display = ["numer", "miejsc", "lokal"]
+    list_filter = ["lokal"]
+
+
+@admin.register(Rezerwacja)
+class RezerwacjaAdmin(SimpleHistoryAdmin):
+    list_display = ["data", "od", "do", "klient", "osoby", "status", "lokal"]
+    list_filter = ["status", "lokal"]
+    date_hierarchy = "data"
+    search_fields = ["klient", "telefon"]

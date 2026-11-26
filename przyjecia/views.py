@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import ProtectedError
 from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 from inertia import render
 
@@ -17,9 +18,9 @@ import kalendarz as k
 from django.conf import settings
 from django.db.models import Q
 
-from . import demo, regulamin, uslugi
-from .forms import PrzyjecieForm
-from .models import DZIALY, MIARY, RODZAJE, STATUSY
+from . import demo, regulamin, stoliki as st, uslugi
+from .forms import PrzyjecieForm, RezerwacjaForm
+from .models import DZIALY, MIARY, RODZAJE, STATUSY, STATUSY_REZERWACJI
 
 
 MIESIACE = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
@@ -182,7 +183,13 @@ def pulpit(request):
             "wartosc": str(sum((uslugi.wycena(p)["razem"] for p in aktywne), start=k.Decimal(0))),
             "do_potwierdzenia": sum(1 for p in aktywne if p.status == "wstepna"),
         },
+        "rezerwacje_dzis": _rezerwacje_dzis(request.lokal, dzis) if settings.REZERWACJE_STOLIKOW else None,
     })
+
+
+def _rezerwacje_dzis(lokal, dzis):
+    rs = lokal.rezerwacje.filter(data=dzis).exclude(status="odwolana")
+    return {"liczba": rs.count(), "osob": sum(rs.values_list("osoby", flat=True))}
 
 
 # ---------- przyjęcia ----------
@@ -448,6 +455,126 @@ def terminy_pdf(request, widok):
     odp = HttpResponse(tresc, content_type="application/pdf")
     odp["Content-Disposition"] = f'inline; filename="{nazwa}"'
     return odp
+
+
+# ---------- rezerwacje stolików à la carte (#820) ----------
+
+def _rezerwacje(widok):
+    """Panel + feature flag REZERWACJE_STOLIKOW (wyłączona = adresów nie ma)."""
+    @wraps(widok)
+    def opakowany(request, *a, **kw):
+        if not settings.REZERWACJE_STOLIKOW:
+            raise Http404
+        return widok(request, *a, **kw)
+    return panel(opakowany)
+
+
+def _dzien(tekst):
+    try:
+        return date.fromisoformat(tekst or "")
+    except ValueError:
+        return date.today()
+
+
+def _rezerwacja(r):
+    return {"id": r.pk, "data": r.data.isoformat(), "od": f"{r.od:%H:%M}", "do": f"{r.do:%H:%M}", "klient": r.klient,
+            "telefon": r.telefon, "osoby": r.osoby, "stoliki": [s.numer for s in r.stoliki.all()], "uwagi": r.uwagi,
+            "status": r.status, "status_nazwa": r.get_status_display()}
+
+
+@_rezerwacje
+def rezerwacje(request):
+    d = _dzien(request.GET.get("d"))
+    rs = list(request.lokal.rezerwacje.filter(data=d).prefetch_related("stoliki"))
+    aktywne = [r for r in rs if r.status != "odwolana"]
+    return render(request, "Rezerwacje", {
+        "dzien": d.isoformat(), "nazwa_dnia": k.nazwa_dnia(d.isoformat()), "dzis": date.today().isoformat(),
+        "poprzedni": (d - timedelta(days=1)).isoformat(), "nastepny": (d + timedelta(days=1)).isoformat(),
+        "rezerwacje": [_rezerwacja(r) for r in rs],
+        "osob": sum(r.osoby for r in aktywne),
+        "stoliki": [{"numer": s.numer, "miejsc": s.miejsc,
+                     "zajety": [st.czas_tekst(r) for r in aktywne if s in r.stoliki.all()]}
+                    for s in request.lokal.stoliki.all()],
+    })
+
+
+def _formularz_rezerwacji(request, rezerwacja=None):
+    opcje = {"stoliki": [{"id": s.pk, "numer": s.numer, "miejsc": s.miejsc} for s in request.lokal.stoliki.all()],
+             "statusy": [{"id": a, "nazwa": b} for a, b in STATUSY_REZERWACJI],
+             "czas": request.lokal.czas_rezerwacji, "edycja": bool(rezerwacja)}
+    if request.method == "POST":
+        d = _json(request)
+        form = RezerwacjaForm({kl: ("" if v is None else v) for kl, v in d.items()}, instance=rezerwacja,
+                              lokal=request.lokal)
+        if form.is_valid():
+            r = form.save()
+            messages.success(request, f"Zapisano rezerwację: {r.klient}, {r.data:%d.%m} {st.czas_tekst(r)}.")
+            return redirect(f"{reverse('rezerwacje')}?d={r.data.isoformat()}")
+        return render(request, "RezerwacjaFormularz", {"rezerwacja": d, "bledy": _bledy_formularza(form), **opcje})
+    if rezerwacja:
+        dane = _rezerwacja(rezerwacja) | {"stoliki": [s.pk for s in rezerwacja.stoliki.all()]}
+    else:
+        dane = {"data": _dzien(request.GET.get("d")).isoformat(), "od": "18:00", "do": "", "osoby": 2, "stoliki": [],
+                "status": "potwierdzona"}
+    return render(request, "RezerwacjaFormularz", {"rezerwacja": dane, "bledy": {}, **opcje})
+
+
+@_rezerwacje
+def rezerwacja_nowa(request):
+    return _formularz_rezerwacji(request)
+
+
+@_rezerwacje
+def rezerwacja_edycja(request, pk):
+    return _formularz_rezerwacji(request, get_object_or_404(request.lokal.rezerwacje, pk=pk))
+
+
+@_rezerwacje
+@require_POST
+def rezerwacja_usun(request, pk):
+    r = get_object_or_404(request.lokal.rezerwacje, pk=pk)
+    dzien, opis = r.data, str(r)
+    r.delete()
+    messages.success(request, f"Usunięto rezerwację: {opis}.")
+    return redirect(f"{reverse('rezerwacje')}?d={dzien.isoformat()}")
+
+
+@_rezerwacje
+def stoliki(request):
+    """Lista stolików + dodaj/zmień (POST {id?, numer, miejsc}) + domyślny czas rezerwacji (POST {czas})."""
+    l = request.lokal
+    if request.method == "POST":
+        d = _json(request)
+        if "czas" in d:
+            blad = st.zapisz_czas(l, d["czas"])
+            ok = "Zapisano domyślny czas rezerwacji."
+        else:
+            stolik = get_object_or_404(l.stoliki, pk=d["id"]) if d.get("id") else None
+            blad = st.zapisz_stolik(l, d, stolik)
+            ok = f"Zapisano stolik {str(d.get('numer', '')).strip()}."
+        if blad:
+            messages.error(request, blad)
+        else:
+            messages.success(request, ok)
+        return redirect("stoliki")
+    dzis = date.today()
+    return render(request, "Stoliki", {"czas": l.czas_rezerwacji, "stoliki": [
+        {"id": s.pk, "numer": s.numer, "miejsc": s.miejsc,
+         "przyszlych": s.rezerwacje.filter(data__gte=dzis).exclude(status="odwolana").count(),
+         "wczesniejszych": s.rezerwacje.filter(data__lt=dzis).count()} for s in l.stoliki.all()]})
+
+
+@_rezerwacje
+@require_POST
+def stolik_usun(request, pk):
+    stolik = get_object_or_404(request.lokal.stoliki, pk=pk)
+    numer = stolik.numer
+    blad = st.usun_stolik(stolik, date.today())
+    if blad:
+        messages.error(request, blad)
+    else:
+        messages.success(request, f"Usunięto stolik {numer}.")
+    return redirect("stoliki")
 
 
 # ---------- ustawienia lokalu ----------

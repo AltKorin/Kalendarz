@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 const MENU = [
   { href: "/", nazwa: "Pulpit" },
   { href: "/przyjecia/", nazwa: "Przyjęcia" },
+  { href: "/rezerwacje/", nazwa: "Rezerwacje", flaga: "rezerwacje" as const },
   { href: "/terminy/", nazwa: "Wydruki" },
   { href: "/menu/", nazwa: "Menu" },
   { href: "/import/", nazwa: "Import z Excela" },
@@ -28,6 +29,7 @@ export function kolorySkorki(k: Record<string, string>, fonty?: Record<string, s
 export default function Layout({ children, tytul }: { children: ReactNode; tytul?: string }) {
   const { props, url } = usePage<Wspolne>();
   const { lokal, uzytkownik, komunikaty, konto_url } = props;
+  const menu = MENU.filter((m) => !m.flaga || props[m.flaga]);
   const aktywny = (href: string) => (href === "/" ? url === "/" || url.startsWith("/?") : url.startsWith(href));
   return (
     <div style={kolorySkorki(lokal.kolory, lokal.fonty)} className="skorka min-h-screen">
@@ -48,7 +50,7 @@ export default function Layout({ children, tytul }: { children: ReactNode; tytul
             </span>
           </Link>
           <nav className="flex flex-wrap gap-1">
-            {[...MENU, ...(uzytkownik?.kierownik ? KIEROWNIK : [])].map((m) => (
+            {[...menu, ...(uzytkownik?.kierownik ? KIEROWNIK : [])].map((m) => (
               <Link key={m.href} href={m.href}
                 className={cn("rounded-md px-3 py-1.5 text-sm font-medium hover:bg-accent",
                   aktywny(m.href) ? "bg-primary text-primary-foreground hover:bg-primary" : "text-foreground")}>

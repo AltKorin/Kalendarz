@@ -34,5 +34,6 @@ class WspolneDaneMiddleware:
                                    "kierownik": jest_kierownikiem(request.user, request.lokal)}
                                   if request.user.is_authenticated else None),
               komunikaty=lambda: [{"tekst": str(m), "poziom": m.level_tag} for m in messages.get_messages(request)],
-              konto_url=lambda: settings.KONTO_URL)
+              konto_url=lambda: settings.KONTO_URL,
+              rezerwacje=lambda: settings.REZERWACJE_STOLIKOW)
         return self.get_response(request)
