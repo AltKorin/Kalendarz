@@ -471,3 +471,23 @@ def ustawienia(request):
                                               "demo": bool(l.demo_do), "firma": bool(l.firma)})
     return render(request, "Ustawienia", {"lokal_dane": {**_lokal_do_formularza(l), "ma_logo": bool(l.logo)},
                                           "bledy": {}, "demo": bool(l.demo_do), "firma": bool(l.firma)})
+
+
+def sitemap_xml(request):
+    """sitemap.xml: publiczne strony serwisu. Strona główna tylko wtedy, gdy instancja ma publiczne wejście."""
+    strony = ["https://kalendarz.sudomie.pl/regulamin/"]
+    if settings.KALENDARZ_PUBLICZNY:
+        strony.insert(0, "https://kalendarz.sudomie.pl/")
+    return HttpResponse(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f'  <url><loc>{u}</loc></url>\n' for u in strony)
+        + '</urlset>\n',
+        content_type="application/xml; charset=utf-8")
+
+
+def robots_txt(request):
+    """robots.txt: Cloudflare dokleja swoje reguły botów, więc Sitemap musi być po stronie aplikacji."""
+    return HttpResponse(
+        "User-agent: *\nAllow: /\n\nSitemap: https://kalendarz.sudomie.pl/sitemap.xml\n",
+        content_type="text/plain; charset=utf-8")
