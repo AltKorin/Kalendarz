@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 type Props = {
   dzis: string; miesiac: Miesiac; przyjecia: Wiersz[]; najblizsze: Wiersz[];
   podsumowanie: { przyjec: number; gosci: number; wartosc: string; do_potwierdzenia: number };
+  rezerwacje_dzis: { liczba: number; osob: number } | null;
 };
 
 const DNI = ["pon.", "wt.", "śr.", "czw.", "pt.", "sob.", "niedz."];
@@ -34,7 +35,7 @@ function Kafel({ etykieta, wartosc, ostrzezenie }: { etykieta: string; wartosc: 
   );
 }
 
-export default function Pulpit({ dzis, miesiac, przyjecia, najblizsze, podsumowanie }: Props) {
+export default function Pulpit({ dzis, miesiac, przyjecia, najblizsze, podsumowanie, rezerwacje_dzis }: Props) {
   const poDniu = new Map<number, Wiersz[]>();
   przyjecia.forEach((p) => {
     // termin kilkudniowy widać w każdym swoim dniu tego miesiąca
@@ -58,6 +59,12 @@ export default function Pulpit({ dzis, miesiac, przyjecia, najblizsze, podsumowa
         <Kafel etykieta="Czeka na potwierdzenie" wartosc={podsumowanie.do_potwierdzenia} ostrzezenie={podsumowanie.do_potwierdzenia > 0} />
       </div>
 
+      {rezerwacje_dzis && (
+        <Link href="/rezerwacje/" className="mb-6 flex items-center justify-between rounded-md border bg-card px-4 py-3 text-sm hover:bg-accent">
+          <span>Stoliki dziś: <b>{rezerwacje_dzis.liczba}</b> rezerwacji, <b>{rezerwacje_dzis.osob}</b> os.</span>
+          <span className="font-medium text-primary">Rezerwacje →</span>
+        </Link>
+      )}
       <Card className="mb-6">
         <CardHeader><CardTitle>Najbliższe 7 dni</CardTitle></CardHeader>
         <CardContent className="space-y-2">

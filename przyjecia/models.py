@@ -31,6 +31,7 @@ class Lokal(models.Model):
     logo = models.ImageField("logo", upload_to="logo/", blank=True)
     sala = models.CharField("nazwa sali na wydrukach", max_length=60, default="Sala")
     demo_do = models.DateTimeField("demo wygasa", null=True, blank=True)
+    czas_rezerwacji = models.PositiveSmallIntegerField("domyślny czas rezerwacji stolika (min)", default=120)
     utworzono = models.DateTimeField(auto_now_add=True)
     history = HistoricalRecords()
 
@@ -161,6 +162,49 @@ class Przyjecie(models.Model):
     @property
     def goscie(self):
         return self.doroslych + self.dzieci
+
+
+class Stolik(models.Model):
+    """Stolik w restauracji (rezerwacje à la carte). Pozycja na rzucie sali — później (#821)."""
+    lokal = models.ForeignKey(Lokal, on_delete=models.CASCADE, related_name="stoliki")
+    numer = models.CharField("numer", max_length=20, help_text="np. 5, T2, Ogród 3")
+    miejsc = models.PositiveSmallIntegerField("miejsc", default=4)
+    history = HistoricalRecords()
+
+    class Meta:
+        ordering = ["numer"]
+        verbose_name_plural = "stoliki"
+        constraints = [models.UniqueConstraint(fields=["lokal", "numer"], name="stolik_unikalny_w_lokalu")]
+
+    def __str__(self):
+        return f"Stolik {self.numer}"
+
+
+STATUSY_REZERWACJI = [("potwierdzona", "Potwierdzona"), ("odwolana", "Odwołana")]
+
+
+class Rezerwacja(models.Model):
+    """Rezerwacja à la carte: kto, kiedy (od–do), ile osób, które stoliki. Mała impreza = dłużej i kilka stolików."""
+    lokal = models.ForeignKey(Lokal, on_delete=models.CASCADE, related_name="rezerwacje")
+    data = models.DateField("data")
+    od = models.TimeField("od godziny")
+    do = models.TimeField("do godziny")
+    klient = models.CharField("nazwisko", max_length=120)
+    telefon = models.CharField("telefon", max_length=40, blank=True)
+    osoby = models.PositiveSmallIntegerField("osób")
+    stoliki = models.ManyToManyField(Stolik, related_name="rezerwacje", blank=True, verbose_name="stoliki")
+    uwagi = models.TextField("uwagi", blank=True)
+    status = models.CharField("status", max_length=20, choices=STATUSY_REZERWACJI, default="potwierdzona")
+    utworzono = models.DateTimeField(auto_now_add=True)
+    history = HistoricalRecords(m2m_fields=[stoliki])
+
+    class Meta:
+        ordering = ["data", "od"]
+        verbose_name_plural = "rezerwacje stolików"
+        constraints = [models.CheckConstraint(condition=models.Q(do__gt=models.F("od")), name="rezerwacja_do_po_od")]
+
+    def __str__(self):
+        return f"{self.data:%d.%m.%Y} {self.od:%H:%M} — {self.klient}"
 
 
 class TozsamoscZewnetrzna(models.Model):
