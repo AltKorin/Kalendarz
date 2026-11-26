@@ -9,6 +9,8 @@ urlpatterns = [
     path("zdrowie/", lambda r: HttpResponse("ok")),
     path("serwis/", admin.site.urls),
     path("api/przyjecia", api.przyjecia),  # serwer–serwer dla Grafiku (#758)
+    path("sitemap.xml", v.sitemap_xml),
+    path("robots.txt", v.robots_txt),
     path("logowanie/", v.logowanie, name="logowanie"),
     path("wyloguj/", v.wyloguj, name="wyloguj"),
     path("oidc/", include("core_sso.urls")),  # logowanie kontem sudomie; redirect_uri bez zmian: /oidc/callback/
