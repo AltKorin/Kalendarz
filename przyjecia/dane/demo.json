@@ -28,7 +28,8 @@
         "doroslych": 32,
         "menu": "Menu 2",
         "status": "odbyla",
-        "od_dzis": true
+        "od_dzis": true,
+        "umowa": "podpisana"
       },
       {
         "dni": 2,
@@ -41,7 +42,8 @@
         "status": "potwierdzona",
         "tort": "17:30",
         "zadatek": 1000,
-        "uwagi": "Bez glutenu: 2 os. Krzesełko dla niemowlęcia."
+        "uwagi": "Bez glutenu: 2 os. Krzesełko dla niemowlęcia.",
+        "umowa": "podpisana"
       },
       {
         "dni": 1,
@@ -52,7 +54,8 @@
         "dzieci": 3,
         "menu": "Menu 2",
         "status": "wstepna",
-        "telefon": "600 000 001"
+        "telefon": "600 000 001",
+        "umowa": "wyslana"
       },
       {
         "dni": 7,
@@ -62,7 +65,8 @@
         "doroslych": 45,
         "menu": "Menu 1",
         "status": "potwierdzona",
-        "zadatek": 2000
+        "zadatek": 2000,
+        "umowa": "podpisana"
       },
       {
         "dni": 9,
@@ -84,7 +88,8 @@
         "menu": "Menu 2",
         "status": "potwierdzona",
         "tort": "19:00",
-        "zadatek": 500
+        "zadatek": 500,
+        "umowa": "wyslana"
       },
       {
         "dni": 22,
@@ -94,6 +99,224 @@
         "doroslych": 60,
         "menu": "Menu 2",
         "status": "rezerwowa"
+      }
+    ],
+    "stoliki": [
+      {
+        "numer": "1",
+        "miejsc": 2,
+        "ksztalt": "prostokatny",
+        "x": 110,
+        "y": 140
+      },
+      {
+        "numer": "2",
+        "miejsc": 2,
+        "ksztalt": "prostokatny",
+        "x": 250,
+        "y": 140
+      },
+      {
+        "numer": "3",
+        "miejsc": 4,
+        "ksztalt": "prostokatny",
+        "x": 400,
+        "y": 140
+      },
+      {
+        "numer": "4",
+        "miejsc": 4,
+        "ksztalt": "prostokatny",
+        "x": 560,
+        "y": 140
+      },
+      {
+        "numer": "5",
+        "miejsc": 4,
+        "ksztalt": "okragly",
+        "x": 170,
+        "y": 450
+      },
+      {
+        "numer": "6",
+        "miejsc": 6,
+        "ksztalt": "okragly",
+        "x": 370,
+        "y": 450
+      },
+      {
+        "numer": "7",
+        "miejsc": 6,
+        "ksztalt": "okragly",
+        "x": 570,
+        "y": 450
+      },
+      {
+        "numer": "8",
+        "miejsc": 8,
+        "ksztalt": "prostokatny",
+        "x": 830,
+        "y": 200
+      },
+      {
+        "numer": "9",
+        "miejsc": 4,
+        "ksztalt": "prostokatny",
+        "x": 830,
+        "y": 520
+      },
+      {
+        "numer": "10",
+        "miejsc": 12,
+        "ksztalt": "prostokatny",
+        "x": 380,
+        "y": 800
+      }
+    ],
+    "rezerwacje": [
+      {
+        "dni": 0,
+        "od": "11:30",
+        "do": "13:30",
+        "klient": "Kowalczyk",
+        "osoby": 4,
+        "stoliki": [
+          "3"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "12:00",
+        "do": "14:00",
+        "klient": "Pani Maria z wnukami",
+        "osoby": 4,
+        "stoliki": [
+          "5"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "13:00",
+        "do": "16:00",
+        "klient": "Urodziny Zosi",
+        "osoby": 10,
+        "stoliki": [
+          "6",
+          "7"
+        ],
+        "uwagi": "Mała impreza: tort z cukierni, balony od gości."
+      },
+      {
+        "dni": 0,
+        "od": "14:00",
+        "do": "16:00",
+        "klient": "Lewandowscy",
+        "osoby": 2,
+        "stoliki": [
+          "1"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "15:00",
+        "do": "17:00",
+        "klient": "Nowicki",
+        "osoby": 4,
+        "stoliki": [
+          "3"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "16:30",
+        "do": "18:30",
+        "klient": "Spotkanie biznesowe",
+        "osoby": 4,
+        "stoliki": [
+          "4"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "17:00",
+        "do": "19:00",
+        "klient": "Dąbrowscy",
+        "osoby": 6,
+        "stoliki": [
+          "6"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "18:00",
+        "do": "20:00",
+        "klient": "Lewandowski",
+        "osoby": 2,
+        "stoliki": [
+          "1"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "18:30",
+        "do": "21:00",
+        "klient": "Kolacja firmowa ABC",
+        "osoby": 8,
+        "stoliki": [
+          "8"
+        ],
+        "uwagi": "Faktura na firmę."
+      },
+      {
+        "dni": 0,
+        "od": "19:00",
+        "do": "21:00",
+        "klient": "Wójcikowie",
+        "osoby": 4,
+        "stoliki": [
+          "5"
+        ]
+      },
+      {
+        "dni": 0,
+        "od": "20:00",
+        "do": "22:30",
+        "klient": "Rocznica ślubu",
+        "osoby": 2,
+        "stoliki": [
+          "2"
+        ],
+        "uwagi": "Kwiaty na stole."
+      },
+      {
+        "dni": 0,
+        "od": "21:00",
+        "do": "23:00",
+        "klient": "Grupa znajomych",
+        "osoby": 6,
+        "stoliki": [
+          "7"
+        ]
+      },
+      {
+        "dni": 1,
+        "od": "13:00",
+        "do": "15:00",
+        "klient": "Zając",
+        "osoby": 2,
+        "stoliki": [
+          "2"
+        ]
+      },
+      {
+        "dni": 1,
+        "od": "19:00",
+        "do": "21:00",
+        "klient": "Kamińscy",
+        "osoby": 4,
+        "stoliki": [
+          "4"
+        ]
       }
     ]
   },
