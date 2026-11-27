@@ -16,10 +16,9 @@ export type Rezerwacja = {
 };
 type Props = {
   dzien: string; nazwa_dnia: string; dzis: string; poprzedni: string; nastepny: string; rezerwacje: Rezerwacja[];
-  osob: number; stoliki: (StolikRzut & { zajety: string[] })[]; rzut: boolean;
+  osob: number; stoliki: (StolikRzut & { zajety: string[] })[]; sala: boolean;
 };
 
-const widokZAdresu = () => (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("widok")) || "lista";
 
 /** Dziś: teraz zaokrąglone w dół do kwadransa; inny dzień: 18:00. */
 const godzinaStartowa = (dzien: string, dzis: string) => {
@@ -65,13 +64,9 @@ function RzutZajetosci({ dzien, dzis, stoliki, rezerwacje }: Pick<Props, "dzien"
   );
 }
 
-export default function Rezerwacje({ dzien, nazwa_dnia, dzis, poprzedni, nastepny, rezerwacje, osob, stoliki, rzut }: Props) {
-  const [widok, setWidok] = useState(rzut ? widokZAdresu() : "lista");
-  const idz = (d: string) => router.get("/rezerwacje/", widok === "rzut" ? { d, widok } : { d }, { preserveScroll: true });
-  const przelacz = (w: string) => {
-    setWidok(w);
-    window.history.replaceState(window.history.state, "", w === "rzut" ? `/rezerwacje/?d=${dzien}&widok=rzut` : `/rezerwacje/?d=${dzien}`);
-  };
+/** Ten sam dzień w dwóch miejscach menu: „Rezerwacje” (lista) i „Sala” (rzut z zajętością stolików). */
+export default function Rezerwacje({ dzien, nazwa_dnia, dzis, poprzedni, nastepny, rezerwacje, osob, stoliki, sala }: Props) {
+  const idz = (d: string) => router.get(sala ? "/sala/" : "/rezerwacje/", { d }, { preserveScroll: true });
   return (
     <Layout>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
@@ -79,18 +74,11 @@ export default function Rezerwacje({ dzien, nazwa_dnia, dzis, poprzedni, nastepn
           <Button variant="outline" size="sm" onClick={() => idz(poprzedni)} aria-label="Poprzedni dzień">←</Button>
           <Input type="date" className="w-40" value={dzien} onChange={(e) => e.target.value && idz(e.target.value)} />
           <Button variant="outline" size="sm" onClick={() => idz(nastepny)} aria-label="Następny dzień">→</Button>
-          <h1 className="text-xl font-bold text-primary">{nazwa_dnia}</h1>
+          <h1 className="text-xl font-bold text-primary">{sala && "Sala · "}{nazwa_dnia}</h1>
           {dzien !== dzis && <Button variant="ghost" size="sm" onClick={() => idz(dzis)}>Dziś</Button>}
         </div>
         <div className="flex flex-wrap gap-2">
-          {rzut && (
-            <div className="flex rounded-md border p-0.5" role="group" aria-label="Widok">
-              {[["lista", "Lista"], ["rzut", "Rzut sali"]].map(([w, nazwa]) => (
-                <Button key={w} size="sm" variant={widok === w ? "default" : "ghost"} aria-pressed={widok === w} onClick={() => przelacz(w)}>{nazwa}</Button>
-              ))}
-            </div>
-          )}
-          <Button variant="outline" asChild><Link href="/stoliki/">Stoliki</Link></Button>
+          <Button variant="outline" asChild><Link href="/stoliki/">{sala ? "Ułóż stoliki" : "Stoliki"}</Link></Button>
           <Button asChild><Link href={`/rezerwacje/nowa/?d=${dzien}`}>+ Dodaj rezerwację</Link></Button>
         </div>
       </div>
@@ -98,7 +86,7 @@ export default function Rezerwacje({ dzien, nazwa_dnia, dzis, poprzedni, nastepn
       <div className="grid gap-5 lg:grid-cols-3">
         <Card className="min-w-0 self-start py-0 lg:col-span-2">
           <CardContent className="px-0">
-            {widok === "rzut" ? <RzutZajetosci dzien={dzien} dzis={dzis} stoliki={stoliki} rezerwacje={rezerwacje} /> : rezerwacje.length === 0 ? (
+            {sala ? <RzutZajetosci dzien={dzien} dzis={dzis} stoliki={stoliki} rezerwacje={rezerwacje} /> : rezerwacje.length === 0 ? (
               <p className="p-6 text-sm text-muted-foreground">Brak rezerwacji tego dnia.</p>
             ) : (
               <Table>

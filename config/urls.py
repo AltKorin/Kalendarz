@@ -29,6 +29,7 @@ urlpatterns = [
     path("terminy/", v.terminy, name="terminy"),
     path("terminy/<str:widok>.pdf", v.terminy_pdf, name="terminy_pdf"),
     path("rezerwacje/", v.rezerwacje, name="rezerwacje"),
+    path("sala/", v.sala, name="sala"),
     path("rezerwacje/nowa/", v.rezerwacja_nowa, name="rezerwacja_nowa"),
     path("rezerwacje/<int:pk>/", v.rezerwacja_edycja, name="rezerwacja_edycja"),
     path("rezerwacje/<int:pk>/usun/", v.rezerwacja_usun, name="rezerwacja_usun"),

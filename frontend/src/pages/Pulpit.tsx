@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 type Props = {
   dzis: string; miesiac: Miesiac; przyjecia: Wiersz[]; najblizsze: Wiersz[];
   podsumowanie: { przyjec: number; gosci: number; wartosc: string; do_potwierdzenia: number };
-  rezerwacje_dzis: { liczba: number; osob: number } | null;
+  rezerwacje_dzis: { liczba: number; osob: number; sala: boolean } | null;
 };
 
 const DNI = ["pon.", "wt.", "śr.", "czw.", "pt.", "sob.", "niedz."];
@@ -60,9 +60,9 @@ export default function Pulpit({ dzis, miesiac, przyjecia, najblizsze, podsumowa
       </div>
 
       {rezerwacje_dzis && (
-        <Link href="/rezerwacje/" className="mb-6 flex items-center justify-between rounded-md border bg-card px-4 py-3 text-sm hover:bg-accent">
+        <Link href={rezerwacje_dzis.sala ? "/sala/" : "/rezerwacje/"} className="mb-6 flex items-center justify-between rounded-md border bg-card px-4 py-3 text-sm hover:bg-accent">
           <span>Stoliki dziś: <b>{rezerwacje_dzis.liczba}</b> rezerwacji, <b>{rezerwacje_dzis.osob}</b> os.</span>
-          <span className="font-medium text-primary">Rezerwacje →</span>
+          <span className="font-medium text-primary">{rezerwacje_dzis.sala ? "Sala →" : "Rezerwacje →"}</span>
         </Link>
       )}
       <Card className="mb-6">

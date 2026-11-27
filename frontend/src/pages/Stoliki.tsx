@@ -146,7 +146,7 @@ export default function Stoliki({ stoliki, czas, rzut, ksztalty }: { stoliki: S[
         </Card>
       </div>
       {rzut && stoliki.length > 0 && <Uklad key={stoliki.map((s) => `${s.id}:${s.x}:${s.y}`).join()} stoliki={stoliki} />}
-      <Button variant="outline" className="mt-5" asChild><Link href="/rezerwacje/">← Rezerwacje</Link></Button>
+      <Button variant="outline" className="mt-5" asChild>{rzut ? <Link href="/sala/">← Sala</Link> : <Link href="/rezerwacje/">← Rezerwacje</Link>}</Button>
     </Layout>
   );
 }
