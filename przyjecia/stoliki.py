@@ -50,8 +50,13 @@ def kolizje_rezerwacji(lokal, data, od, do, stoliki, pomin_pk=None):
 
 
 def zapisz_stolik(lokal, dane, stolik=None):
-    """Dodaj/zmień stolik. Zwraca błąd (None = zapisano)."""
+    """Dodaj/zmień stolik (numer, miejsca, kształt). Zwraca błąd (None = zapisano)."""
+    from .models import KSZTALTY
+
     numer = str(dane.get("numer", "")).strip()[:20]
+    ksztalt = dane.get("ksztalt") or "prostokatny"
+    if ksztalt not in dict(KSZTALTY):
+        return "Nieznany kształt stolika."
     try:
         miejsc = int(dane.get("miejsc") or 0)
     except (TypeError, ValueError):
@@ -63,7 +68,7 @@ def zapisz_stolik(lokal, dane, stolik=None):
     if lokal.stoliki.filter(numer=numer).exclude(pk=stolik.pk if stolik else None).exists():
         return f"Stolik „{numer}” już jest."
     s = stolik or lokal.stoliki.model(lokal=lokal)
-    s.numer, s.miejsc = numer, miejsc
+    s.numer, s.miejsc, s.ksztalt = numer, miejsc, ksztalt
     s.save()
     return None
 
@@ -87,4 +92,34 @@ def zapisz_czas(lokal, minuty):
         return "Czas rezerwacji od 15 minut do 12 godzin."
     lokal.czas_rezerwacji = minuty
     lokal.save(update_fields=["czas_rezerwacji"])
+    return None
+
+
+def zapisz_uklad(lokal, uklad):
+    """Rzut sali: [{"id", "x", "y"}], x/y w promilach płótna (0–1000), oba puste = stolik zdjęty z rzutu.
+    Wszystko albo nic — błąd w jednym stoliku nie zapisuje żadnego. Zwraca błąd (None = zapisano)."""
+    from django.db import transaction
+
+    if not isinstance(uklad, list):
+        return "Zły układ sali."
+    stoliki = {s.pk: s for s in lokal.stoliki.all()}
+    zmiany = []
+    for poz in uklad:
+        try:
+            s = stoliki[int(poz["id"])]
+            x, y = poz.get("x"), poz.get("y")
+            if (x is None) != (y is None):
+                return f"Stolik {s.numer}: podaj obie współrzędne albo żadnej."
+            if x is not None:
+                x, y = int(x), int(y)
+                if not (0 <= x <= 1000 and 0 <= y <= 1000):
+                    return f"Stolik {s.numer} wyszedł poza salę."
+        except (KeyError, TypeError, ValueError):
+            return "Zły układ sali (nieznany stolik albo współrzędne)."
+        zmiany.append((s, x, y))
+    with transaction.atomic():
+        for s, x, y in zmiany:
+            if (s.x, s.y) != (x, y):
+                s.x, s.y = x, y
+                s.save(update_fields=["x", "y"])
     return None

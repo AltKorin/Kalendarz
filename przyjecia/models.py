@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from simple_history.models import HistoricalRecords
 
@@ -166,11 +166,18 @@ class Przyjecie(models.Model):
         return self.doroslych + self.dzieci
 
 
+KSZTALTY = [("prostokatny", "Prostokątny"), ("okragly", "Okrągły")]
+NA_RZUCIE = [MaxValueValidator(1000)]
+
+
 class Stolik(models.Model):
-    """Stolik w restauracji (rezerwacje à la carte). Pozycja na rzucie sali — później (#821)."""
+    """Stolik w restauracji (rezerwacje à la carte). x, y = środek na rzucie sali w promilach płótna; puste = poza rzutem."""
     lokal = models.ForeignKey(Lokal, on_delete=models.CASCADE, related_name="stoliki")
     numer = models.CharField("numer", max_length=20, help_text="np. 5, T2, Ogród 3")
     miejsc = models.PositiveSmallIntegerField("miejsc", default=4)
+    ksztalt = models.CharField("kształt", max_length=12, choices=KSZTALTY, default="prostokatny")
+    x = models.PositiveSmallIntegerField("x na rzucie (‰)", null=True, blank=True, validators=NA_RZUCIE)
+    y = models.PositiveSmallIntegerField("y na rzucie (‰)", null=True, blank=True, validators=NA_RZUCIE)
     history = HistoricalRecords()
 
     class Meta:
