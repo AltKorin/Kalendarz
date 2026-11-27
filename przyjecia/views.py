@@ -1,6 +1,6 @@
 import calendar
 import json
-from datetime import date, timedelta
+from datetime import date, time, timedelta
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -20,7 +20,7 @@ from django.db.models import Q
 
 from . import demo, regulamin, stoliki as st, uslugi
 from .forms import PrzyjecieForm, RezerwacjaForm
-from .models import DZIALY, MIARY, RODZAJE, STATUSY, STATUSY_REZERWACJI
+from .models import DZIALY, KSZTALTY, MIARY, RODZAJE, STATUSY, STATUSY_REZERWACJI
 
 
 MIESIACE = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
@@ -478,7 +478,8 @@ def _dzien(tekst):
 
 def _rezerwacja(r):
     return {"id": r.pk, "data": r.data.isoformat(), "od": f"{r.od:%H:%M}", "do": f"{r.do:%H:%M}", "klient": r.klient,
-            "telefon": r.telefon, "osoby": r.osoby, "stoliki": [s.numer for s in r.stoliki.all()], "uwagi": r.uwagi,
+            "telefon": r.telefon, "osoby": r.osoby, "stoliki": [s.numer for s in r.stoliki.all()],
+            "stoliki_id": [s.pk for s in r.stoliki.all()], "uwagi": r.uwagi,
             "status": r.status, "status_nazwa": r.get_status_display()}
 
 
@@ -492,10 +493,14 @@ def rezerwacje(request):
         "poprzedni": (d - timedelta(days=1)).isoformat(), "nastepny": (d + timedelta(days=1)).isoformat(),
         "rezerwacje": [_rezerwacja(r) for r in rs],
         "osob": sum(r.osoby for r in aktywne),
-        "stoliki": [{"numer": s.numer, "miejsc": s.miejsc,
-                     "zajety": [st.czas_tekst(r) for r in aktywne if s in r.stoliki.all()]}
+        "stoliki": [_stolik(s) | {"zajety": [st.czas_tekst(r) for r in aktywne if s in r.stoliki.all()]}
                     for s in request.lokal.stoliki.all()],
+        "rzut": settings.RZUT_SALI,
     })
+
+
+def _stolik(s):
+    return {"id": s.pk, "numer": s.numer, "miejsc": s.miejsc, "ksztalt": s.ksztalt, "x": s.x, "y": s.y}
 
 
 def _formularz_rezerwacji(request, rezerwacja=None):
@@ -514,9 +519,21 @@ def _formularz_rezerwacji(request, rezerwacja=None):
     if rezerwacja:
         dane = _rezerwacja(rezerwacja) | {"stoliki": [s.pk for s in rezerwacja.stoliki.all()]}
     else:
-        dane = {"data": _dzien(request.GET.get("d")).isoformat(), "od": "18:00", "do": "", "osoby": 2, "stoliki": [],
+        # z rzutu sali: ?od=19:30&stolik=<id> — kliknięty wolny stolik o wybranej godzinie
+        od = request.GET.get("od", "")
+        stolik = request.GET.get("stolik", "")
+        dane = {"data": _dzien(request.GET.get("d")).isoformat(),
+                "od": od if len(od) == 5 and _godzina(od) else "18:00", "do": "", "osoby": 2,
+                "stoliki": [int(stolik)] if stolik.isdigit() and request.lokal.stoliki.filter(pk=stolik).exists() else [],
                 "status": "potwierdzona"}
     return render(request, "RezerwacjaFormularz", {"rezerwacja": dane, "bledy": {}, **opcje})
+
+
+def _godzina(tekst):
+    try:
+        return time.fromisoformat(tekst)
+    except ValueError:
+        return None
 
 
 @_rezerwacje
@@ -545,7 +562,12 @@ def stoliki(request):
     l = request.lokal
     if request.method == "POST":
         d = _json(request)
-        if "czas" in d:
+        if "uklad" in d:
+            if not settings.RZUT_SALI:
+                raise Http404
+            blad = st.zapisz_uklad(l, d["uklad"])
+            ok = "Zapisano układ sali."
+        elif "czas" in d:
             blad = st.zapisz_czas(l, d["czas"])
             ok = "Zapisano domyślny czas rezerwacji."
         else:
@@ -558,10 +580,12 @@ def stoliki(request):
             messages.success(request, ok)
         return redirect("stoliki")
     dzis = date.today()
-    return render(request, "Stoliki", {"czas": l.czas_rezerwacji, "stoliki": [
-        {"id": s.pk, "numer": s.numer, "miejsc": s.miejsc,
-         "przyszlych": s.rezerwacje.filter(data__gte=dzis).exclude(status="odwolana").count(),
-         "wczesniejszych": s.rezerwacje.filter(data__lt=dzis).count()} for s in l.stoliki.all()]})
+    return render(request, "Stoliki", {
+        "czas": l.czas_rezerwacji, "rzut": settings.RZUT_SALI,
+        "ksztalty": [{"id": a, "nazwa": b} for a, b in KSZTALTY],
+        "stoliki": [_stolik(s) | {
+            "przyszlych": s.rezerwacje.filter(data__gte=dzis).exclude(status="odwolana").count(),
+            "wczesniejszych": s.rezerwacje.filter(data__lt=dzis).count()} for s in l.stoliki.all()]})
 
 
 @_rezerwacje

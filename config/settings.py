@@ -33,6 +33,8 @@ if GA_MEASUREMENT_ID and not __import__("re").fullmatch(r"G-[A-Z0-9]{4,20}", GA_
 # Akceptacja regulaminu przez kierownika lokalu przed pracą w panelu (wspólna instancja). Instalacja klienta: umowa osobno.
 # Rezerwacje stolików à la carte (#820). Feature flag: 0 = nie ma w menu, adresy dają 404.
 REZERWACJE_STOLIKOW = env("REZERWACJE_STOLIKOW", "0") == "1"
+# Rzut sali (#821): układanie stolików i podgląd zajętości. Działa tylko razem z REZERWACJE_STOLIKOW.
+RZUT_SALI = env("RZUT_SALI", "0") == "1"
 REGULAMIN_WYMAGANY = env("REGULAMIN_WYMAGANY", "1" if KALENDARZ_PUBLICZNY else "0") == "1"
 
 INSTALLED_APPS = [
