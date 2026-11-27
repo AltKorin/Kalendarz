@@ -106,3 +106,5 @@ def test_restauracja_demo_pokazuje_rzut_sali_i_stany_umow(client, db, settings):
     assert not any(st.koliduje(a, b) for a, b in pary), "dane demo mają podwójną rezerwację stolika"
     assert {"brak", "wyslana", "podpisana"} <= set(lokal.przyjecia.values_list("umowa", flat=True))
     assert client.get("/rezerwacje/?widok=rzut").status_code == 200
+    # pulpit prowadzi wprost do rzutu, gdy sala jest ułożona (inaczej rzut ginie za przełącznikiem „Lista / Rzut sali”)
+    assert client.get("/", HTTP_X_INERTIA="true").json()["props"]["rezerwacje_dzis"]["rzut"] is True

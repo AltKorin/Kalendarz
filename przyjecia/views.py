@@ -190,7 +190,8 @@ def pulpit(request):
 
 def _rezerwacje_dzis(lokal, dzis):
     rs = lokal.rezerwacje.filter(data=dzis).exclude(status="odwolana")
-    return {"liczba": rs.count(), "osob": sum(rs.values_list("osoby", flat=True))}
+    return {"liczba": rs.count(), "osob": sum(rs.values_list("osoby", flat=True)),
+            "rzut": settings.RZUT_SALI and lokal.stoliki.filter(x__isnull=False).exists()}
 
 
 # ---------- przyjęcia ----------

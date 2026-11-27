@@ -19,7 +19,9 @@ type Props = {
   osob: number; stoliki: (StolikRzut & { zajety: string[] })[]; rzut: boolean;
 };
 
-const widokZAdresu = () => (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("widok")) || "lista";
+/** Widok z adresu (?widok=lista|rzut); bez niego rzut, gdy sala jest ułożona — to główny obraz dnia w restauracji. */
+const widokZAdresu = (domyslny: string) =>
+  (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("widok")) || domyslny;
 
 /** Dziś: teraz zaokrąglone w dół do kwadransa; inny dzień: 18:00. */
 const godzinaStartowa = (dzien: string, dzis: string) => {
@@ -66,11 +68,11 @@ function RzutZajetosci({ dzien, dzis, stoliki, rezerwacje }: Pick<Props, "dzien"
 }
 
 export default function Rezerwacje({ dzien, nazwa_dnia, dzis, poprzedni, nastepny, rezerwacje, osob, stoliki, rzut }: Props) {
-  const [widok, setWidok] = useState(rzut ? widokZAdresu() : "lista");
-  const idz = (d: string) => router.get("/rezerwacje/", widok === "rzut" ? { d, widok } : { d }, { preserveScroll: true });
+  const [widok, setWidok] = useState(rzut ? widokZAdresu(stoliki.some((s) => s.x !== null) ? "rzut" : "lista") : "lista");
+  const idz = (d: string) => router.get("/rezerwacje/", rzut ? { d, widok } : { d }, { preserveScroll: true });
   const przelacz = (w: string) => {
     setWidok(w);
-    window.history.replaceState(window.history.state, "", w === "rzut" ? `/rezerwacje/?d=${dzien}&widok=rzut` : `/rezerwacje/?d=${dzien}`);
+    window.history.replaceState(window.history.state, "", `/rezerwacje/?d=${dzien}&widok=${w}`);
   };
   return (
     <Layout>
