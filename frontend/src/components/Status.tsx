@@ -13,7 +13,7 @@ export function Status({ status, nazwa }: { status: string; nazwa: string }) {
 
 const STYL_UMOWY: Record<string, string> = {
   brak: "border-dashed text-muted-foreground",
-  wyslana: "bg-sky-50 text-sky-900 border-sky-300",
+  wyslana: "bg-secondary text-primary border-primary/40",  // barwy lokalu (Słownik Kolorów), nie nowy odcień
   podpisana: "bg-green-100 text-green-900 border-green-300",
 };
 
