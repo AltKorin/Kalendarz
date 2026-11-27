@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 import Layout from "@/components/Layout";
-import { Status } from "@/components/Status";
+import { Status, Umowa } from "@/components/Status";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { kiedy, type Miesiac, osoby, type Wiersz, zl } from "@/lib/typy";
@@ -81,6 +81,7 @@ export default function Pulpit({ dzis, miesiac, przyjecia, najblizsze, podsumowa
               <span className="font-medium">{p.klient}</span>
               <span className="text-sm text-muted-foreground">{[p.rodzaj, osoby(p), p.menu].filter(Boolean).join(" · ")}</span>
               <Status status={p.status} nazwa={p.status_nazwa} />
+              {p.status !== "odwolana" && <Umowa umowa={p.umowa} nazwa={p.umowa_nazwa} />}
               {p.uwagi && <span className="text-sm font-medium text-destructive">⚠ {p.uwagi}</span>}
             </Link>
           ))}

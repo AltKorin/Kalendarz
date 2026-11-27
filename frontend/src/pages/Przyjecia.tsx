@@ -1,6 +1,6 @@
 import { Link, router } from "@inertiajs/react";
 import Layout from "@/components/Layout";
-import { Status } from "@/components/Status";
+import { Status, Umowa } from "@/components/Status";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -29,7 +29,7 @@ export default function Przyjecia({ miesiac, przyjecia }: { miesiac: Miesiac; pr
                   <TableHead>Kiedy</TableHead><TableHead>Klient / impreza</TableHead>
                   <TableHead>Rodzaj</TableHead><TableHead className="text-right">Goście</TableHead><TableHead>Menu</TableHead>
                   <TableHead className="text-right">Razem</TableHead><TableHead className="text-right">Zadatek</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead>Status</TableHead><TableHead>Umowa</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -43,6 +43,7 @@ export default function Przyjecia({ miesiac, przyjecia }: { miesiac: Miesiac; pr
                     <TableCell className="text-right">{p.menu ? zl(p.razem) : "—"}</TableCell>
                     <TableCell className="text-right">{zl(p.zadatek)}</TableCell>
                     <TableCell><Status status={p.status} nazwa={p.status_nazwa} /></TableCell>
+                    <TableCell><Umowa umowa={p.umowa} nazwa={p.umowa_nazwa} /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>

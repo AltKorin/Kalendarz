@@ -10,3 +10,13 @@ const STYL: Record<string, string> = {
 export function Status({ status, nazwa }: { status: string; nazwa: string }) {
   return <Badge variant="outline" className={STYL[status]}>{nazwa}</Badge>;
 }
+
+const STYL_UMOWY: Record<string, string> = {
+  brak: "border-dashed text-muted-foreground",
+  wyslana: "bg-sky-50 text-sky-900 border-sky-300",
+  podpisana: "bg-green-100 text-green-900 border-green-300",
+};
+
+export function Umowa({ umowa, nazwa }: { umowa: string; nazwa: string }) {
+  return <Badge variant="outline" className={STYL_UMOWY[umowa]}>{nazwa}</Badge>;
+}

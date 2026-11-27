@@ -18,9 +18,9 @@ import kalendarz as k
 from django.conf import settings
 from django.db.models import Q
 
-from . import demo, regulamin, stoliki as st, uslugi
+from . import demo, regulamin, stoliki as st, umowa as um, uslugi
 from .forms import PrzyjecieForm, RezerwacjaForm
-from .models import DZIALY, MIARY, RODZAJE, STATUSY, STATUSY_REZERWACJI
+from .models import DZIALY, MIARY, RODZAJE, STATUSY, STATUSY_REZERWACJI, UMOWY
 
 
 MIESIACE = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
@@ -61,7 +61,8 @@ def _wiersz(p):
             "rodzaj": p.get_rodzaj_display(), "goscie": p.goscie, "osoby_opis": p.osoby_opis, "sale": p.sale,
             "menu": p.menu.nazwa if p.menu else None, "razem": str(w["razem"]),
             "zadatek": str(p.zadatek), "do_zaplaty": str(w["do_zaplaty"]), "status": p.status,
-            "status_nazwa": p.get_status_display(), "uwagi": p.uwagi}
+            "status_nazwa": p.get_status_display(), "uwagi": p.uwagi,
+            "umowa": p.umowa, "umowa_nazwa": p.get_umowa_display()}
 
 
 def _miesiac(request):
@@ -264,7 +265,23 @@ def przyjecie(request, pk):
                        "zadanie": o["zadanie"], "pozycje": o.get("pozycje", [])}
                       for o in sorted(dane["obowiazki"], key=lambda o: k._minuty(o["od"]))],
         "dzialy": [{"id": a, "nazwa": b} for a, b in DZIALY],
+        "umowy": [{"id": a, "nazwa": b} for a, b in UMOWY],
     })
+
+
+@panel
+@require_POST
+def przyjecie_umowa(request, pk):
+    """Stan umowy jednym kliknięciem na stronie przyjęcia (zmiana trafia do historii jak każda inna)."""
+    p = get_object_or_404(request.lokal.przyjecia, pk=pk)
+    stan = _json(request).get("umowa")
+    if stan not in dict(UMOWY):
+        messages.error(request, "Nieznany stan umowy.")
+    elif stan != p.umowa:
+        p.umowa = stan
+        p.save(update_fields=["umowa"])
+        messages.success(request, f"{p.get_umowa_display()}: {p.klient}.")
+    return redirect("przyjecie", pk=pk)
 
 
 @panel
@@ -280,10 +297,10 @@ def przyjecie_usun(request, pk):
 @panel
 def przyjecie_dokument(request, pk, rodzaj):
     p = get_object_or_404(request.lokal.przyjecia.select_related("menu", "lokal"), pk=pk)
-    if rodzaj not in ("agenda", "plan"):
+    if rodzaj not in ("agenda", "plan", "umowa"):
         raise Http404
     try:
-        tresc, nazwa = uslugi.dokument(p, rodzaj)
+        tresc, nazwa = um.umowa_docx(p) if rodzaj == "umowa" else uslugi.dokument(p, rodzaj)
     except ValueError as e:
         messages.error(request, str(e))
         return redirect("przyjecie", pk=pk)

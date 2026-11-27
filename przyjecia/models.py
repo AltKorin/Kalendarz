@@ -12,6 +12,7 @@ RODZAJE = [(r, r.capitalize()) for r in
             "grupa", "pakiet hotelu", "święta", "inne"]]
 STATUSY = [("wstepna", "Wstępna"), ("potwierdzona", "Potwierdzona"), ("rezerwowa", "Lista rezerwowa"),
            ("odbyla", "Odbyła się"), ("odwolana", "Odwołana")]
+UMOWY = [("brak", "Umowa niewysłana"), ("wyslana", "Umowa wysłana"), ("podpisana", "Umowa podpisana")]
 # Słownik Kolorów #030 (Mineral Gray + Pompeian Red), docs/PLAN-wersja-publiczna.md — dopóki lokal nie wybierze swoich
 KOLORY_DOMYSLNE = {"glowny": "3A3F44", "akcent": "A3172B", "tlo_naglowka": "EEF0F1", "linia": "A3AAB0"}
 
@@ -140,6 +141,7 @@ class Przyjecie(models.Model):
     zadatek = models.DecimalField("zadatek", max_digits=10, decimal_places=2, default=0, validators=ZERO)
     uwagi = models.TextField("diety, alergie, uwagi", blank=True)
     status = models.CharField("status", max_length=20, choices=STATUSY, default="wstepna")
+    umowa = models.CharField("umowa", max_length=20, choices=UMOWY, default="brak")
     utworzono = models.DateTimeField(auto_now_add=True)
     history = HistoricalRecords()
 
