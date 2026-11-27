@@ -2,7 +2,7 @@ import { Link, router } from "@inertiajs/react";
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Potwierdz } from "@/components/Potwierdz";
-import { Status } from "@/components/Status";
+import { Status, Umowa } from "@/components/Status";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { kiedy, type Opcja, osoby, type Wiersz } from "@/lib/typy";
@@ -13,10 +13,10 @@ type Props = {
   wycena: string[]; do_potwierdzenia: string[]; plan: boolean;
   program: { od: string; tytul: string; opis: string[] }[];
   obowiazki: { od: string; dzial: string; dzial_nazwa: string; zadanie: string; pozycje: string[] }[];
-  dzialy: Opcja[];
+  dzialy: Opcja[]; umowy: Opcja[];
 };
 
-export default function Przyjecie({ przyjecie: p, wycena, do_potwierdzenia, plan, program, obowiazki, dzialy }: Props) {
+export default function Przyjecie({ przyjecie: p, wycena, do_potwierdzenia, plan, program, obowiazki, dzialy, umowy }: Props) {
   const [dzial, setDzial] = useState<string>("");
   const widoczne = obowiazki.filter((o) => !dzial || o.dzial === dzial);
   return (
@@ -30,9 +30,10 @@ export default function Przyjecie({ przyjecie: p, wycena, do_potwierdzenia, plan
             {p.menu && <> · {p.menu}</>}{p.sale && <> · {p.sale}</>}
             {p.telefon && <> · tel. <a className="underline" href={`tel:${p.telefon}`}>{p.telefon}</a></>}
           </p>
-          <div className="mt-2"><Status status={p.status} nazwa={p.status_nazwa} /></div>
+          <div className="mt-2 flex flex-wrap gap-2"><Status status={p.status} nazwa={p.status_nazwa} /><Umowa umowa={p.umowa} nazwa={p.umowa_nazwa} /></div>
         </div>
         <div className="nie-drukuj flex flex-wrap gap-2">
+          <Button asChild><a href={`/przyjecia/${p.id}/umowa.docx`}>Umowa (Word)</a></Button>
           {plan && <Button asChild><a href={`/przyjecia/${p.id}/agenda.docx`}>Agenda (Word)</a></Button>}
           {plan && <Button asChild><a href={`/przyjecia/${p.id}/plan.docx`}>Plan obsługi (Word)</a></Button>}
           <Button variant="outline" onClick={() => window.print()}>Drukuj</Button>
@@ -78,6 +79,25 @@ export default function Przyjecie({ przyjecie: p, wycena, do_potwierdzenia, plan
           </Card>
         )}
       </div>
+
+      <Card className="nie-drukuj mb-5 gap-2">
+        <CardHeader><CardTitle>Umowa z klientem</CardTitle></CardHeader>
+        <CardContent className="space-y-3 text-sm">
+          <div className="flex flex-wrap gap-1" role="group" aria-label="Stan umowy">
+            {umowy.map((u) => (
+              <Button key={String(u.id)} size="sm" variant={p.umowa === u.id ? "default" : "outline"} aria-pressed={p.umowa === u.id}
+                onClick={() => p.umowa !== u.id && router.post(`/przyjecia/${p.id}/umowa/`, { umowa: u.id }, { preserveScroll: true })}>
+                {u.nazwa}
+              </Button>
+            ))}
+          </div>
+          <p className="text-muted-foreground">
+            „Umowa (Word)” to <b>wzór</b> wypełniony danymi tego przyjęcia (termin, goście, ceny, zadatek, menu). Przed
+            wysłaniem dostosuj go do swojego lokalu: uzupełnij dane firmy i pola w [nawiasach], sprawdź zasady (alkohol,
+            dekoracje, odwołanie), a w razie wątpliwości daj do sprawdzenia prawnikowi.
+          </p>
+        </CardContent>
+      </Card>
 
       {!plan && (
         <p className="rounded-md border bg-card p-4 text-sm text-muted-foreground">

@@ -1,0 +1,97 @@
+{
+ "_zrodlo": "Wzór z projektu Malbork (umowa_impreza.py, 26.11.2026), bez danych tamtej restauracji. Pola {…} wypełnia przyjecia/umowa.py z przyjęcia; [nawiasy] uzupełnia lokal.",
+ "paragrafy": [
+  {
+   "naglowek": "§ 1. Przedmiot umowy",
+   "punkty": [
+    "Restauracja zobowiązuje się przygotować i obsłużyć imprezę okolicznościową: {rodzaj} (dalej: **Impreza**).",
+    "Usługa obejmuje: udostępnienie sali, przygotowanie i podanie posiłków oraz napojów według Załącznika nr 1, nakrycie i podstawową dekorację stołów, obsługę kelnerską oraz sprzątanie po Imprezie.",
+    "Umowa nie obejmuje usług noclegowych.",
+    "Usługi dodatkowe (np. dekoracje sali, tort, DJ, animator, parking) są realizowane tylko wtedy, gdy wpisano je w Załączniku nr 1 albo uzgodniono na piśmie lub e-mailem."
+   ]
+  },
+  {
+   "naglowek": "§ 2. Termin, miejsce i liczba gości",
+   "punkty": [
+    "Impreza odbędzie się w dniu {data} w godzinach {od}–[GG:MM], w sali {sala}, w lokalu {lokal}.",
+    "Sala jest przeznaczona wyłącznie dla gości Zamawiającego: [tak / nie – pozostała część lokalu działa normalnie].",
+    "Przewidywana liczba gości: {doroslych} dorosłych i {dzieci} dzieci do lat [...]. Minimalna liczba gości, przy której obowiązuje cena z § 3: [...].",
+    "Ostateczną liczbę gości Zamawiający podaje najpóźniej do [DD.MM.RRRR], e-mailem lub SMS-em. Rozliczenie obejmie nie mniej niż podaną wtedy liczbę osób.",
+    "Przedłużenie Imprezy poza godzinę zakończenia jest możliwe za zgodą Restauracji, za opłatą [...] zł brutto za każdą rozpoczętą godzinę."
+   ]
+  },
+  {
+   "naglowek": "§ 3. Wynagrodzenie, zadatek i płatności",
+   "punkty": [
+    "Cena wynosi {cena_os} brutto za osobę dorosłą i {cena_dziecko} brutto za dziecko, według menu z Załącznika nr 1{menu}. Napoje i usługi spoza menu rozlicza się według karty lub cen podanych w Załączniku nr 1.",
+    "Szacunkowa wartość Imprezy wynosi {razem} brutto.",
+    "Zamawiający wpłaca zadatek w kwocie {zadatek} (słownie: [...]) w ciągu [7] dni od podpisania umowy, przelewem na rachunek [nr rachunku] lub gotówką za pokwitowaniem. Do wpłaty zadatku termin jest zarezerwowany wstępnie.",
+    "Zadatek zalicza się na poczet wynagrodzenia. Skutki niewykonania umowy określa art. 394 Kodeksu cywilnego i § 5.",
+    "Pozostałą kwotę Zamawiający płaci: [do DD.MM.RRRR / w dniu Imprezy po jej zakończeniu], na podstawie rozliczenia faktycznej liczby gości i zamówionych usług.",
+    "Restauracja wystawia paragon lub, na żądanie, fakturę."
+   ]
+  },
+  {
+   "naglowek": "§ 4. Obowiązki stron i zasady organizacji",
+   "punkty": [
+    "Restauracja zapewnia salę gotową najpóźniej [30] minut przed rozpoczęciem Imprezy, obsługę w liczbie [...] osób oraz potrawy przygotowane zgodnie z zasadami bezpieczeństwa żywności.",
+    "Zamawiający przekaże najpóźniej z ostateczną liczbą gości informacje o dietach i alergiach pokarmowych gości. Restauracja udziela informacji o alergenach w potrawach.",
+    "**Alkohol.** Alkohol sprzedaje i podaje Restauracja na podstawie posiadanego zezwolenia. Restauracja odmawia podania alkoholu osobom niepełnoletnim i nietrzeźwym. Wniesienie własnego alkoholu: [niedozwolone / dozwolone za opłatą korkową [...] zł za butelkę].",
+    "**Własne produkty.** Zamawiający może wnieść tort lub ciasta wyłącznie z zakładu cukierniczego, z dowodem zakupu zawierającym datę produkcji i skład. Za produkty wniesione przez Zamawiającego odpowiada Zamawiający. Opłata za podanie: [...] zł / brak.",
+    "**Muzyka i hałas.** Oprawę muzyczną zapewnia [Restauracja / Zamawiający]. Ewentualne opłaty dla organizacji zbiorowego zarządzania prawami (np. ZAiKS, STOART) pokrywa [Restauracja / Zamawiający]. Po godzinie [22:00] muzyka jest ściszana zgodnie z regulaminem lokalu i przepisami porządkowymi gminy.",
+    "**Dekoracje.** Zabronione jest używanie fajerwerków, rac, otwartego ognia poza zniczami w osłonie, konfetti i brokatu. Montaż dekoracji Zamawiającego: od godz. [...], demontaż i odbiór: do [godz. ... / następnego dnia do godz. ...].",
+    "**Szkody.** Zamawiający odpowiada za szkody w mieniu Restauracji wyrządzone przez niego i jego gości, na zasadach ogólnych Kodeksu cywilnego. Szkody są spisywane w protokole w dniu Imprezy lub najpóźniej następnego dnia.",
+    "Restauracja nie odpowiada za rzeczy pozostawione przez gości poza szatnią strzeżoną, z wyjątkiem przypadków, w których odpowiedzialność Restauracji wynika z bezwzględnie obowiązujących przepisów.",
+    "Na koniec Imprezy Zamawiający może zabrać niezjedzone potrawy w opakowaniach Restauracji [bezpłatnie / za opłatą ... zł]."
+   ]
+  },
+  {
+   "naglowek": "§ 5. Odwołanie Imprezy i zmiany",
+   "punkty": [
+    "Jeżeli Zamawiający odwoła Imprezę lub umowa nie zostanie wykonana z przyczyn leżących po jego stronie, Restauracja zachowuje zadatek.",
+    "Jeżeli Zamawiający odwoła Imprezę później niż [7] dni przed jej terminem, pokrywa ponadto udokumentowane koszty produktów zakupionych już dla tej Imprezy, w kwocie przekraczającej zadatek.",
+    "Jeżeli umowa nie zostanie wykonana z przyczyn leżących po stronie Restauracji, Zamawiający może żądać zwrotu zadatku w podwójnej wysokości.",
+    "Gdy Impreza nie może się odbyć z przyczyn, za które żadna ze stron nie odpowiada (np. awaria budynku, zakaz organizacji zgromadzeń), zadatek podlega zwrotowi w całości albo, za zgodą obu stron, zostaje przeniesiony na inny termin.",
+    "Zmiana terminu na wniosek Zamawiającego jest możliwa za zgodą Restauracji, w miarę dostępności sali. Zadatek przechodzi wtedy na nowy termin.",
+    "Cena z § 3 jest stała. Jeśli Impreza odbywa się później niż [6] miesięcy od zawarcia umowy, Restauracja może zaproponować nową cenę najpóźniej [60] dni przed Imprezą. Zamawiający, który jej nie przyjmie, może odstąpić od umowy z pełnym zwrotem zadatku albo zrealizować Imprezę w cenie dotychczasowej po zmianie menu uzgodnionej przez strony.",
+    "Zamawiający będący konsumentem przyjmuje do wiadomości, że przy umowie zawartej na odległość lub poza lokalem prawo odstąpienia od umowy w ciągu 14 dni nie przysługuje, ponieważ umowa dotyczy usługi gastronomicznej o oznaczonym dniu świadczenia (art. 38 ust. 1 pkt 12 ustawy o prawach konsumenta).",
+    "Zmiany umowy wymagają formy dokumentowej (np. e-mail, SMS) pod rygorem nieważności, z wyjątkiem podania ostatecznej liczby gości, które może nastąpić w sposób określony w § 2 ust. 4."
+   ]
+  },
+  {
+   "naglowek": "§ 6. Dane osobowe",
+   "punkty": [
+    "Administratorem danych osobowych Zamawiającego jest Restauracja.",
+    "Dane są przetwarzane w celu zawarcia i wykonania umowy (art. 6 ust. 1 lit. b RODO), wystawienia dokumentów księgowych i ich archiwizacji (art. 6 ust. 1 lit. c RODO) oraz dochodzenia roszczeń (art. 6 ust. 1 lit. f RODO).",
+    "Dane są przechowywane przez okres wymagany przepisami podatkowymi i rachunkowymi lub do przedawnienia roszczeń. Zamawiającemu przysługuje prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, sprzeciwu oraz skargi do Prezesa UODO. Kontakt: {kontakt}."
+   ]
+  },
+  {
+   "naglowek": "§ 7. Postanowienia końcowe",
+   "punkty": [
+    "W sprawach nieuregulowanych stosuje się przepisy Kodeksu cywilnego, a wobec konsumentów również ustawy o prawach konsumenta.",
+    "Spory rozstrzyga sąd właściwy według przepisów ogólnych.",
+    "Załącznik nr 1 (menu, usługi dodatkowe, harmonogram) stanowi integralną część umowy.",
+    "Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze stron."
+   ]
+  }
+ ],
+ "menu_wiersze": [
+  "Przystawka",
+  "Zupa",
+  "Danie główne",
+  "Deser",
+  "Zimna płyta / bufet",
+  "Napoje bez alkoholu",
+  "Alkohol",
+  "Menu dla dzieci",
+  "Usługi dodatkowe"
+ ],
+ "harmonogram": [
+  "Przyjazd gości, powitanie",
+  "Obiad / pierwsze danie gorące",
+  "Tort / deser",
+  "Kolacja / drugie danie gorące",
+  "Zakończenie Imprezy"
+ ]
+}
