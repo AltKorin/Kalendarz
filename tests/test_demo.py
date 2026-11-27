@@ -108,6 +108,7 @@ def test_restauracja_demo_pokazuje_rzut_sali_i_stany_umow(client, db, settings):
     # rzut ma własną pozycję „Sala” w menu i link z pulpitu — w „Rezerwacjach” nikt go nie szuka (Konrad 27.11)
     sala = client.get("/sala/", HTTP_X_INERTIA="true").json()["props"]
     assert sala["sala"] is True and sala["stoliki"] and sala["rezerwacje"]
-    assert client.get("/", HTTP_X_INERTIA="true").json()["props"]["rezerwacje_dzis"]["sala"] is True
+    pulpit = client.get("/", HTTP_X_INERTIA="true").json()["props"]["rezerwacje_dzis"]
+    assert pulpit["sala"] is True and len(pulpit["stoliki"]) == len(stoliki) and pulpit["rezerwacje"]  # karta „Sala dziś”
     settings.RZUT_SALI = False
     assert client.get("/sala/").status_code == 404
