@@ -60,6 +60,13 @@ def zbuduj(wariant, user, demo_do):
             data=data, koniec=data + timedelta(days=noce) if noce else None, start=_czas(p.pop("start", None)),
             tort=_czas(p.pop("tort", None)), menu=m, cena_os=m.cena_os if m else 0,
             cena_dziecko=m.cena_dziecko if m else None, **p)
+    stoliki = {s["numer"]: lokal.stoliki.create(**s) for s in d.get("stoliki", [])}
+    for r in d.get("rezerwacje", []):  # à la carte na dziś i jutro: rzut sali od razu pokazuje wolne i zajęte
+        r = dict(r)
+        numery = r.pop("stoliki")
+        rez = lokal.rezerwacje.create(data=dzis + timedelta(days=r.pop("dni")), od=_czas(r.pop("od")),
+                                      do=_czas(r.pop("do")), **r)
+        rez.stoliki.set([stoliki[n] for n in numery])
     return lokal
 
 

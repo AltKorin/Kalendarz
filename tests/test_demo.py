@@ -86,3 +86,23 @@ def test_strona_publiczna_tylko_gdy_wlaczona(client, db, settings):
     assert r.json()["component"] == "Start" and {d["id"] for d in r.json()["props"]["demo"]} == {"restauracja", "hotel"}
     settings.KALENDARZ_PUBLICZNY = False
     assert client.get("/")["Location"] == "/logowanie/"
+
+
+def test_restauracja_demo_pokazuje_rzut_sali_i_stany_umow(client, db, settings):
+    """Demo nie może pokazywać pustego rzutu ani samych „niewysłanych” umów (pierwszy kontakt klienta z funkcją)."""
+    from itertools import combinations
+    from przyjecia import stoliki as st
+
+    settings.REZERWACJE_STOLIKOW = settings.RZUT_SALI = True
+    client.post("/demo/restauracja/")
+    lokal = Lokal.objects.get()
+    stoliki = list(lokal.stoliki.all())
+    assert len(stoliki) >= 8 and all(s.x is not None and 0 <= s.x <= 1000 and 0 <= s.y <= 1000 for s in stoliki)
+    dzis = timezone.localdate()
+    rez = list(lokal.rezerwacje.filter(data=dzis).prefetch_related("stoliki"))
+    assert len(rez) >= 5 and all(r.stoliki.exists() for r in rez)
+    pary = [((a.od, a.do, {s.pk for s in a.stoliki.all()}), (b.od, b.do, {s.pk for s in b.stoliki.all()}))
+            for a, b in combinations(rez, 2)]
+    assert not any(st.koliduje(a, b) for a, b in pary), "dane demo mają podwójną rezerwację stolika"
+    assert {"brak", "wyslana", "podpisana"} <= set(lokal.przyjecia.values_list("umowa", flat=True))
+    assert client.get("/rezerwacje/?widok=rzut").status_code == 200
