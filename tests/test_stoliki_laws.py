@@ -48,3 +48,23 @@ def test_kolizje_zwracaja_tylko_kolidujace_z_wspolnymi_stolikami(nowa, inne):
 def test_domyslny_koniec_po_poczatku_tego_samego_dnia(od, minuty):
     koniec = s.domyslny_koniec(godz(od), minuty)
     assert godz(od) < koniec <= time(23, 59)
+
+
+NUMER = st.one_of(st.integers(0, 999).map(str),
+                  st.tuples(st.sampled_from(["Ogród ", "T", "taras "]), st.integers(0, 99)).map(lambda t: f"{t[0]}{t[1]}"),
+                  st.text(alphabet="abcXYZ 12", min_size=1, max_size=6))
+
+
+@given(st.lists(NUMER, max_size=15))
+@example(["10", "2", "1", "Ogród 10", "Ogród 2"])
+def test_kolejnosc_numerow_jak_liczby_i_bez_zgubienia(numery):
+    class S:
+        def __init__(self, numer):
+            self.numer = numer
+    wynik = [x.numer for x in s.po_numerze([S(n) for n in numery])]
+    assert sorted(wynik) == sorted(numery)  # nic nie ginie, nic nie przybywa
+    liczby = [int(n) for n in wynik if n.isdigit()]
+    assert liczby == sorted(liczby)  # same liczby: 2 przed 10
+    for prefiks in ("Ogród ", "T", "taras "):
+        ogon = [int(n[len(prefiks):]) for n in wynik if n.startswith(prefiks) and n[len(prefiks):].isdigit()]
+        assert ogon == sorted(ogon)

@@ -35,8 +35,9 @@ export default function Rezerwacje({ dzien, nazwa_dnia, dzis, poprzedni, nastepn
       </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <Card className="min-w-0 self-start py-0 lg:col-span-2">
-          <CardContent className="px-0">
+        <Card className={cn("min-w-0 self-start py-0", sala ? "lg:col-span-3" : "lg:col-span-2")}>
+          {/* Sala: rzut na całą szerokość (jak „Sala dziś” na pulpicie) — na 2/3 napisy na stolikach się ucinały */}
+          <CardContent className={cn("px-0", sala && "mx-auto w-full max-w-4xl")}>
             {sala ? <RzutZajetosci dzien={dzien} dzis={dzis} stoliki={stoliki} rezerwacje={rezerwacje} /> : rezerwacje.length === 0 ? (
               <p className="p-6 text-sm text-muted-foreground">Brak rezerwacji tego dnia.</p>
             ) : (
@@ -74,9 +75,9 @@ export default function Rezerwacje({ dzien, nazwa_dnia, dzis, poprzedni, nastepn
           </CardContent>
         </Card>
 
-        <Card className="self-start">
+        <Card className={cn("self-start", sala && "lg:col-span-3")}>
           <CardHeader><CardTitle>Stoliki — {osob} os. zarezerwowanych</CardTitle></CardHeader>
-          <CardContent className="space-y-1.5 text-sm">
+          <CardContent className={cn("text-sm", sala ? "grid gap-x-8 gap-y-1.5 sm:grid-cols-2 lg:grid-cols-3" : "space-y-1.5")}>
             {stoliki.length === 0 && (
               <p className="text-muted-foreground">Nie ma jeszcze stolików. <Link href="/stoliki/" className="underline">Dodaj stoliki</Link>, żeby przypisywać je do rezerwacji.</p>
             )}

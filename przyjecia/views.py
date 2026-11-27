@@ -499,7 +499,7 @@ def _dzien(tekst):
 
 def _rezerwacja(r):
     return {"id": r.pk, "data": r.data.isoformat(), "od": f"{r.od:%H:%M}", "do": f"{r.do:%H:%M}", "klient": r.klient,
-            "telefon": r.telefon, "osoby": r.osoby, "stoliki": [s.numer for s in r.stoliki.all()],
+            "telefon": r.telefon, "osoby": r.osoby, "stoliki": [s.numer for s in st.po_numerze(r.stoliki.all())],
             "stoliki_id": [s.pk for s in r.stoliki.all()], "uwagi": r.uwagi,
             "status": r.status, "status_nazwa": r.get_status_display()}
 
@@ -523,7 +523,7 @@ def _sala_dnia(lokal, d):
     aktywne = [r for r in rs if r.status != "odwolana"]
     return {"rezerwacje": [_rezerwacja(r) for r in rs], "osob": sum(r.osoby for r in aktywne),
             "stoliki": [_stolik(s) | {"zajety": [st.czas_tekst(r) for r in aktywne if s in r.stoliki.all()]}
-                        for s in lokal.stoliki.all()]}
+                        for s in st.po_numerze(lokal.stoliki.all())]}
 
 
 def _dzien_rezerwacji(request, sala):
@@ -540,7 +540,7 @@ def _stolik(s):
 
 
 def _formularz_rezerwacji(request, rezerwacja=None):
-    opcje = {"stoliki": [{"id": s.pk, "numer": s.numer, "miejsc": s.miejsc} for s in request.lokal.stoliki.all()],
+    opcje = {"stoliki": [{"id": s.pk, "numer": s.numer, "miejsc": s.miejsc} for s in st.po_numerze(request.lokal.stoliki.all())],
              "statusy": [{"id": a, "nazwa": b} for a, b in STATUSY_REZERWACJI],
              "czas": request.lokal.czas_rezerwacji, "edycja": bool(rezerwacja)}
     if request.method == "POST":
@@ -621,7 +621,7 @@ def stoliki(request):
         "ksztalty": [{"id": a, "nazwa": b} for a, b in KSZTALTY],
         "stoliki": [_stolik(s) | {
             "przyszlych": s.rezerwacje.filter(data__gte=dzis).exclude(status="odwolana").count(),
-            "wczesniejszych": s.rezerwacje.filter(data__lt=dzis).count()} for s in l.stoliki.all()]})
+            "wczesniejszych": s.rezerwacje.filter(data__lt=dzis).count()} for s in st.po_numerze(l.stoliki.all())]})
 
 
 @_rezerwacje

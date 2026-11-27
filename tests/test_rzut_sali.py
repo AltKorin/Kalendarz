@@ -92,3 +92,11 @@ def test_zla_podpowiedz_daje_domyslne(client, sala, zapytanie):
 def test_podpowiedz_nie_wpuszcza_cudzego_stolika(client, sala):
     obcy = Stolik.objects.create(lokal=Lokal.objects.create(nazwa="Obcy"), numer="9")
     assert props(client.get(f"/rezerwacje/nowa/?stolik={obcy.pk}", HTTP_X_INERTIA="true"))["rezerwacja"]["stoliki"] == []
+
+
+def test_stoliki_w_kolejnosci_liczbowej_na_sali_i_w_formularzu(client, sala, lokal):
+    for n in ("10", "Ogród 2", "Ogród 10", "4"):
+        Stolik.objects.create(lokal=lokal, numer=n)
+    oczekiwane = ["1", "2", "3", "4", "10", "Ogród 2", "Ogród 10"]
+    for url in ("/sala/", "/rezerwacje/", "/stoliki/", "/rezerwacje/nowa/"):
+        assert [s["numer"] for s in props(client.get(url, HTTP_X_INERTIA="true"))["stoliki"]] == oczekiwane, url

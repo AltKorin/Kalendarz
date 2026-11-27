@@ -7,9 +7,21 @@ Prawa (tests/test_stoliki_laws.py):
 - kolizja jest symetryczna,
 - rezerwacje bez wspólnego stolika nigdy nie kolidują (także bez stolika w ogóle),
 - wspólny stolik + nakładające się godziny = kolizja; styk (koniec = początek) = brak kolizji,
-- domyślny koniec jest po początku i tego samego dnia (najpóźniej 23:59).
+- domyślny koniec jest po początku i tego samego dnia (najpóźniej 23:59),
+- kolejność numerów: liczby rosnąco jak liczby (2 przed 10), sortowanie jest stabilne i nie gubi stolików.
 """
+import re
 from datetime import date, datetime, time, timedelta
+
+
+def klucz_numeru(numer):
+    """„2” < „10” < „Ogród 2” < „Ogród 10” — liczby w numerze porównywane jak liczby, reszta bez wielkości liter."""
+    return [(0, int(c), "") if c.isdigit() else (1, 0, c.casefold()) for c in re.split(r"(\d+)", str(numer)) if c]
+
+
+def po_numerze(stoliki):
+    """Stoliki w kolejności, w jakiej szuka ich człowiek (baza sortuje numery jak tekst: 1, 10, 2)."""
+    return sorted(stoliki, key=lambda s: klucz_numeru(s.numer))
 
 
 def koliduje(a, b):
