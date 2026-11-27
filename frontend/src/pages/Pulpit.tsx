@@ -1,5 +1,6 @@
 import { Link } from "@inertiajs/react";
 import Layout from "@/components/Layout";
+import { type Rezerwacja, RzutZajetosci, type StolikRzut } from "@/components/RzutSali";
 import { Status, Umowa } from "@/components/Status";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +10,7 @@ import { cn } from "@/lib/utils";
 type Props = {
   dzis: string; miesiac: Miesiac; przyjecia: Wiersz[]; najblizsze: Wiersz[];
   podsumowanie: { przyjec: number; gosci: number; wartosc: string; do_potwierdzenia: number };
-  rezerwacje_dzis: { liczba: number; osob: number; sala: boolean } | null;
+  rezerwacje_dzis: { liczba: number; osob: number; sala: boolean; stoliki?: StolikRzut[]; rezerwacje?: Rezerwacja[] } | null;
 };
 
 const DNI = ["pon.", "wt.", "śr.", "czw.", "pt.", "sob.", "niedz."];
@@ -59,6 +60,42 @@ export default function Pulpit({ dzis, miesiac, przyjecia, najblizsze, podsumowa
         <Kafel etykieta="Czeka na potwierdzenie" wartosc={podsumowanie.do_potwierdzenia} ostrzezenie={podsumowanie.do_potwierdzenia > 0} />
       </div>
 
+      {rezerwacje_dzis?.stoliki && rezerwacje_dzis.rezerwacje ? (
+        <div className="mb-6 grid gap-6 lg:grid-cols-2">
+          <Card className="gap-0 self-start py-0">
+            <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2 pt-5">
+              <CardTitle>Sala dziś <span className="text-sm font-normal text-muted-foreground">· {rezerwacje_dzis.liczba} rezerwacji, {rezerwacje_dzis.osob} os.</span></CardTitle>
+              <Link href="/sala/" className="text-sm font-medium text-primary hover:underline">Otwórz salę →</Link>
+            </CardHeader>
+            <CardContent className="px-0">
+              <RzutZajetosci dzien={dzis} dzis={dzis} stoliki={rezerwacje_dzis.stoliki} rezerwacje={rezerwacje_dzis.rezerwacje} />
+            </CardContent>
+          </Card>
+          <Card className="self-start">
+            <CardHeader><CardTitle>Najbliższe 7 dni</CardTitle></CardHeader>
+            <CardContent className="space-y-2">
+              {najblizsze.length === 0 && (
+                <p className="text-sm text-muted-foreground">
+                  Brak przyjęć w najbliższym tygodniu. <Link className="underline" href="/przyjecia/nowe/">Dodaj przyjęcie</Link>
+                  {" "}albo <Link className="underline" href="/menu/">ustaw menu</Link>.
+                </p>
+              )}
+              {najblizsze.map((p) => (
+                <Link key={p.id} href={`/przyjecia/${p.id}/`}
+                  className="flex flex-wrap items-center gap-x-4 gap-y-1 rounded-md border px-3 py-2 hover:bg-accent">
+                  <span className="w-44 font-semibold text-primary">{kiedy(p)}</span>
+                  <span className="font-medium">{p.klient}</span>
+                  <span className="text-sm text-muted-foreground">{[p.rodzaj, osoby(p), p.menu].filter(Boolean).join(" · ")}</span>
+                  <Status status={p.status} nazwa={p.status_nazwa} />
+                  {p.status !== "odwolana" && <Umowa umowa={p.umowa} nazwa={p.umowa_nazwa} />}
+                  {p.uwagi && <span className="text-sm font-medium text-destructive">⚠ {p.uwagi}</span>}
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+      ) : (
+        <>
       {rezerwacje_dzis && (
         <Link href={rezerwacje_dzis.sala ? "/sala/" : "/rezerwacje/"} className="mb-6 flex items-center justify-between rounded-md border bg-card px-4 py-3 text-sm hover:bg-accent">
           <span>Stoliki dziś: <b>{rezerwacje_dzis.liczba}</b> rezerwacji, <b>{rezerwacje_dzis.osob}</b> os.</span>
@@ -87,6 +124,8 @@ export default function Pulpit({ dzis, miesiac, przyjecia, najblizsze, podsumowa
           ))}
         </CardContent>
       </Card>
+        </>
+      )}
 
       <Card>
         <CardHeader><CardTitle>Kalendarz — {miesiac.nazwa}</CardTitle></CardHeader>

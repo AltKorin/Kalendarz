@@ -190,8 +190,11 @@ def pulpit(request):
 
 def _rezerwacje_dzis(lokal, dzis):
     rs = lokal.rezerwacje.filter(data=dzis).exclude(status="odwolana")
-    return {"liczba": rs.count(), "osob": sum(rs.values_list("osoby", flat=True)),
-            "sala": settings.RZUT_SALI}
+    wynik = {"liczba": rs.count(), "osob": sum(rs.values_list("osoby", flat=True)), "sala": settings.RZUT_SALI}
+    if settings.RZUT_SALI and lokal.stoliki.filter(x__isnull=False).exists():
+        sala = _sala_dnia(lokal, dzis)  # karta „Sala dziś” na pulpicie (Konrad 27.11)
+        wynik |= {"stoliki": sala["stoliki"], "rezerwacje": sala["rezerwacje"]}
+    return wynik
 
 
 # ---------- przyjęcia ----------
@@ -514,18 +517,21 @@ def sala(request):
     return _dzien_rezerwacji(request, sala=True)
 
 
+def _sala_dnia(lokal, d):
+    """Rezerwacje dnia i stoliki z ich zajętością — wspólne dla Rezerwacji, Sali i pulpitu."""
+    rs = list(lokal.rezerwacje.filter(data=d).prefetch_related("stoliki"))
+    aktywne = [r for r in rs if r.status != "odwolana"]
+    return {"rezerwacje": [_rezerwacja(r) for r in rs], "osob": sum(r.osoby for r in aktywne),
+            "stoliki": [_stolik(s) | {"zajety": [st.czas_tekst(r) for r in aktywne if s in r.stoliki.all()]}
+                        for s in lokal.stoliki.all()]}
+
+
 def _dzien_rezerwacji(request, sala):
     d = _dzien(request.GET.get("d"))
-    rs = list(request.lokal.rezerwacje.filter(data=d).prefetch_related("stoliki"))
-    aktywne = [r for r in rs if r.status != "odwolana"]
     return render(request, "Rezerwacje", {
         "dzien": d.isoformat(), "nazwa_dnia": k.nazwa_dnia(d.isoformat()), "dzis": date.today().isoformat(),
         "poprzedni": (d - timedelta(days=1)).isoformat(), "nastepny": (d + timedelta(days=1)).isoformat(),
-        "rezerwacje": [_rezerwacja(r) for r in rs],
-        "osob": sum(r.osoby for r in aktywne),
-        "stoliki": [_stolik(s) | {"zajety": [st.czas_tekst(r) for r in aktywne if s in r.stoliki.all()]}
-                    for s in request.lokal.stoliki.all()],
-        "sala": sala,
+        **_sala_dnia(request.lokal, d), "sala": sala,
     })
 
 
