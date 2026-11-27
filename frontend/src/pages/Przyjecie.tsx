@@ -5,6 +5,7 @@ import { Potwierdz } from "@/components/Potwierdz";
 import { Status, Umowa } from "@/components/Status";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { kiedy, type Opcja, osoby, type Wiersz } from "@/lib/typy";
 import { cn } from "@/lib/utils";
 
@@ -80,22 +81,14 @@ export default function Przyjecie({ przyjecie: p, wycena, do_potwierdzenia, plan
         )}
       </div>
 
-      <Card className="nie-drukuj mb-5 gap-2">
-        <CardHeader><CardTitle>Umowa z klientem</CardTitle></CardHeader>
-        <CardContent className="space-y-3 text-sm">
-          <div className="flex flex-wrap gap-1" role="group" aria-label="Stan umowy">
-            {umowy.map((u) => (
-              <Button key={String(u.id)} size="sm" variant={p.umowa === u.id ? "default" : "outline"} aria-pressed={p.umowa === u.id}
-                onClick={() => p.umowa !== u.id && router.post(`/przyjecia/${p.id}/umowa/`, { umowa: u.id }, { preserveScroll: true })}>
-                {u.nazwa}
-              </Button>
-            ))}
-          </div>
-          <p className="text-muted-foreground">
-            „Umowa (Word)” to <b>wzór</b> wypełniony danymi tego przyjęcia (termin, goście, ceny, zadatek, menu). Przed
-            wysłaniem dostosuj go do swojego lokalu: uzupełnij dane firmy i pola w [nawiasach], sprawdź zasady (alkohol,
-            dekoracje, odwołanie), a w razie wątpliwości daj do sprawdzenia prawnikowi.
-          </p>
+      <Card className="nie-drukuj mb-5 gap-2 py-4">
+        <CardContent className="flex flex-wrap items-center gap-x-4 gap-y-2 px-4 text-sm">
+          <span className="font-semibold">Umowa z klientem</span>
+          <ToggleGroup type="single" variant="outline" size="sm" value={p.umowa} aria-label="Stan umowy"
+            onValueChange={(v) => v && v !== p.umowa && router.post(`/przyjecia/${p.id}/umowa/`, { umowa: v }, { preserveScroll: true })}>
+            {umowy.map((u) => <ToggleGroupItem key={String(u.id)} value={String(u.id)} className="px-3 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">{u.nazwa}</ToggleGroupItem>)}
+          </ToggleGroup>
+          <span className="basis-full text-muted-foreground">„Umowa (Word)” to wzór z danymi przyjęcia: przed wysłaniem uzupełnij [nawiasy] i dopasuj zasady do lokalu.</span>
         </CardContent>
       </Card>
 
