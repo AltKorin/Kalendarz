@@ -11,6 +11,7 @@ export type Wspolne = {
 export type Wiersz = {
   id: number; data: string; dzien: string; koniec: string | null; start: string | null; klient: string; rodzaj: string;
   goscie: number; osoby_opis: string; sale: string; menu: string | null; razem: string; zadatek: string; do_zaplaty: string; status: string; status_nazwa: string; uwagi: string;
+  umowa: string; umowa_nazwa: string;
 };
 export type Miesiac = {
   klucz: string; nazwa: string; poprzedni: string; nastepny: string; pierwszy_dzien_tygodnia: number; dni: number;

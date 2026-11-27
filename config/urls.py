@@ -24,6 +24,7 @@ urlpatterns = [
     path("przyjecia/<int:pk>/", v.przyjecie, name="przyjecie"),
     path("przyjecia/<int:pk>/edycja/", v.przyjecie_edycja, name="przyjecie_edycja"),
     path("przyjecia/<int:pk>/usun/", v.przyjecie_usun, name="przyjecie_usun"),
+    path("przyjecia/<int:pk>/umowa/", v.przyjecie_umowa, name="przyjecie_umowa"),
     path("przyjecia/<int:pk>/<str:rodzaj>.docx", v.przyjecie_dokument, name="przyjecie_dokument"),
     path("terminy/", v.terminy, name="terminy"),
     path("terminy/<str:widok>.pdf", v.terminy_pdf, name="terminy_pdf"),
