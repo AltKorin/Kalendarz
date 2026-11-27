@@ -153,4 +153,4 @@ def test_pulpit_pokazuje_rezerwacje_dzis(client, sala, lokal):
     for kto, status in [("A", "potwierdzona"), ("B", "odwolana")]:
         Rezerwacja.objects.create(lokal=lokal, data=date.today(), od=time(12), do=time(14), klient=kto, osoby=3,
                                   status=status)
-    assert props(client.get("/", HTTP_X_INERTIA="true"))["rezerwacje_dzis"] == {"liczba": 1, "osob": 3, "rzut": False}
+    assert props(client.get("/", HTTP_X_INERTIA="true"))["rezerwacje_dzis"] == {"liczba": 1, "osob": 3, "sala": False}

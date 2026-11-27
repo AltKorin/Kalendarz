@@ -5,6 +5,7 @@ export type Wspolne = {
   lokal: Lokal;
   konto_url: string;
   rezerwacje: boolean;
+  sala: boolean;
   uzytkownik: { nazwa: string; kierownik: boolean } | null;
   komunikaty: { tekst: string; poziom: string }[];
 };

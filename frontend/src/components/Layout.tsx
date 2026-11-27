@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 const MENU = [
   { href: "/", nazwa: "Pulpit" },
   { href: "/przyjecia/", nazwa: "Przyjęcia" },
+  { href: "/sala/", nazwa: "Sala", flaga: "sala" as const },
   { href: "/rezerwacje/", nazwa: "Rezerwacje", flaga: "rezerwacje" as const },
   { href: "/terminy/", nazwa: "Wydruki" },
   { href: "/menu/", nazwa: "Menu" },

@@ -35,8 +35,8 @@ def test_zapis_ukladu_i_zdjecie_z_rzutu(client, sala):
                                          {"id": c.pk, "x": None, "y": None}]})
     assert komunikat(client)["poziom"] == "success"
     assert [(s.x, s.y) for s in Stolik.objects.order_by("numer")] == [(0, 1000), (500, 250), (None, None)]
-    widok = props(client.get("/rezerwacje/", HTTP_X_INERTIA="true"))
-    assert widok["rzut"] is True and {s["numer"]: (s["x"], s["y"]) for s in widok["stoliki"]}["2"] == (500, 250)
+    widok = props(client.get("/sala/", HTTP_X_INERTIA="true"))
+    assert widok["sala"] is True and {s["numer"]: (s["x"], s["y"]) for s in widok["stoliki"]}["2"] == (500, 250)
 
 
 @pytest.mark.parametrize("zly", [

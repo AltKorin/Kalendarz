@@ -35,5 +35,6 @@ class WspolneDaneMiddleware:
                                   if request.user.is_authenticated else None),
               komunikaty=lambda: [{"tekst": str(m), "poziom": m.level_tag} for m in messages.get_messages(request)],
               konto_url=lambda: settings.KONTO_URL,
-              rezerwacje=lambda: settings.REZERWACJE_STOLIKOW)
+              rezerwacje=lambda: settings.REZERWACJE_STOLIKOW,
+              sala=lambda: settings.REZERWACJE_STOLIKOW and settings.RZUT_SALI)
         return self.get_response(request)

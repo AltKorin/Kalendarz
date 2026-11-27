@@ -191,7 +191,7 @@ def pulpit(request):
 def _rezerwacje_dzis(lokal, dzis):
     rs = lokal.rezerwacje.filter(data=dzis).exclude(status="odwolana")
     return {"liczba": rs.count(), "osob": sum(rs.values_list("osoby", flat=True)),
-            "rzut": settings.RZUT_SALI and lokal.stoliki.filter(x__isnull=False).exists()}
+            "sala": settings.RZUT_SALI}
 
 
 # ---------- przyjęcia ----------
@@ -503,6 +503,18 @@ def _rezerwacja(r):
 
 @_rezerwacje
 def rezerwacje(request):
+    return _dzien_rezerwacji(request, sala=False)
+
+
+@_rezerwacje
+def sala(request):
+    """Rzut sali z zajętością stolików o wybranej godzinie — osobna pozycja menu (#821, zgłoszenie Konrada 27.11)."""
+    if not settings.RZUT_SALI:
+        raise Http404
+    return _dzien_rezerwacji(request, sala=True)
+
+
+def _dzien_rezerwacji(request, sala):
     d = _dzien(request.GET.get("d"))
     rs = list(request.lokal.rezerwacje.filter(data=d).prefetch_related("stoliki"))
     aktywne = [r for r in rs if r.status != "odwolana"]
@@ -513,7 +525,7 @@ def rezerwacje(request):
         "osob": sum(r.osoby for r in aktywne),
         "stoliki": [_stolik(s) | {"zajety": [st.czas_tekst(r) for r in aktywne if s in r.stoliki.all()]}
                     for s in request.lokal.stoliki.all()],
-        "rzut": settings.RZUT_SALI,
+        "sala": sala,
     })
 
 
